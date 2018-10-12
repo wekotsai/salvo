@@ -20,9 +20,11 @@ $(function() {
     // handler for when user clicks add person
 
     function addPlayer() {
-        var name = $("#email").val();
-        if (name) {
-            postPlayer(name);
+        var userName = $("#email").val();
+        console.log(userName);
+        console.log('dsdsds');
+        if (userName) {
+            postPlayer(userName);
         }
     }
 
