@@ -14,6 +14,8 @@ public class Player {
     private String userName;
     private String email;
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -39,7 +41,13 @@ public class Player {
     public String getEmail() {
         return email;
     }
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

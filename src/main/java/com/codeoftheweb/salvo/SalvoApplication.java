@@ -36,8 +36,10 @@ public class SalvoApplication {
 			gamerepository.save(game3);
 
 			GamePlayer gamePlayer1 = new GamePlayer(game1, player1);
+			GamePlayer gamePlayer2 = new GamePlayer(game1, player2);
 
 			gameplayerrepository.save(gamePlayer1);
+			gameplayerrepository.save(gamePlayer2);
 
 //			repository.save(new Player("Jack", "Bauer"));
 //			repository.save(new Player("Chloe", "O'Brian"));

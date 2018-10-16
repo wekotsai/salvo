@@ -1,37 +1,43 @@
 package com.codeoftheweb.salvo;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+
+//import java.sql.Date;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 public class Game {
+
+    public long getDate() {
+        return new Date().getTime();
+    }
+
+    public void setDate(ZonedDateTime date) {
+        this.date = date;
+    }
+
+    private ZonedDateTime date = ZonedDateTime.now();
+    // private date = new Date();
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date date;
 
     @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayer;
 
 
     public Game() {
-        this.date = new Date();
+
     }
 
-    public Date getDate() {
-        return date;
+    public long getId() {
+        return id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-
-
-    public String toString() {
-        return date + " ";
+    public void setId(long id) {
+        this.id = id;
     }
 }
