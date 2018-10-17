@@ -1,8 +1,9 @@
 package com.codeoftheweb.salvo;
 
-import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
+
 
 @Entity
 public class GamePlayer {
@@ -17,6 +18,9 @@ public class GamePlayer {
     @JoinColumn(name="game_id")
     private Game game;
 
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    Set<Ship> ship;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -27,6 +31,10 @@ public class GamePlayer {
         this.game = game;
         this.player = player;
         this.date = new Date();
+    }
+
+    public Set<Ship> getShip() {
+        return getShip();
     }
 
     public long getId() {
@@ -51,9 +59,3 @@ public class GamePlayer {
         this.date = date;
     }
 }
-//
-//    fetch('api/projects').then(response => {
-//        response.json().then(json => {
-//        let data = json;
-//        });
-//        });

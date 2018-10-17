@@ -1,11 +1,10 @@
 package com.codeoftheweb.salvo;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -13,8 +12,6 @@ public class Player {
 
     private String userName;
     private String email;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
