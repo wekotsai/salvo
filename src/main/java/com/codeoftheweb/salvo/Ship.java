@@ -13,6 +13,7 @@ public class Ship {
     private long id;
 
     @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="gamePlayer_id")
     private GamePlayer gamePlayer;
 
     @ElementCollection
@@ -29,13 +30,17 @@ public class Ship {
 
     public Ship() {}
 
+    public Ship(String type) {
+        this.type = type;
+    }
+
     public Ship(String type, List<String> location) {
         this.type = type;
         this.location = location;
     }
 
-    public GamePlayer getGamePlayer() {
-        return getGamePlayer();
+    public void setGamePlayer(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
     }
 
     public String getType() {

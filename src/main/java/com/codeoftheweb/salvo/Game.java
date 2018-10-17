@@ -27,9 +27,7 @@ public class Game {
     @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayer;
 
-
     public Game() {
-
     }
 
     public long getId() {

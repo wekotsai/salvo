@@ -42,6 +42,7 @@ public class SalvoController {
         gamemap.put("id", game.getId());
         gamemap.put("created", game.getDate());
         gamemap.put("gamePlayer", gameplayerSet(game.gamePlayer));
+       gamemap.put("ships", game.gamePlayer.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
         return gamemap;
     }
 
@@ -60,8 +61,17 @@ public class SalvoController {
         return gameplayermap;
     }
 
+    private Map<String, Object> shipMap(Ship ship) {
+        Map<String, Object> shipmap = new LinkedHashMap<String, Object>();
+        shipmap.put("type", ship.getType());
+        shipmap.put("location", ship.getLocation());
+        return shipmap;
+    }
+
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayer) {
         return gamePlayer.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
     }
+
+
 
 }

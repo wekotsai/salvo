@@ -2,6 +2,7 @@ package com.codeoftheweb.salvo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -18,8 +19,16 @@ public class GamePlayer {
     @JoinColumn(name="game_id")
     private Game game;
 
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
+
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
-    Set<Ship> ship;
+    private Set<Ship> ships = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +42,9 @@ public class GamePlayer {
         this.date = new Date();
     }
 
-    public Set<Ship> getShip() {
-        return getShip();
+    public void addShip (Ship shipIn) {
+        shipIn.setGamePlayer(this);
+        this.ships.add(shipIn);
     }
 
     public long getId() {

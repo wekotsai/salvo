@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class SalvoApplication {
 			GamePlayer gamePlayer1 = new GamePlayer(game1, player1);
 			GamePlayer gamePlayer2 = new GamePlayer(game1, player2);
 
-			gameplayerrepository.save(gamePlayer1);
-			gameplayerrepository.save(gamePlayer2);
+
 
 			List<String> loc1 = Arrays.asList("D3", "E3", "F3");
 			List<String> loc2 = Arrays.asList("B5","B6","B7","B8","B9");
@@ -51,17 +51,27 @@ public class SalvoApplication {
 			List<String> loc4 = Arrays.asList("E8","F8","G8","H8");
 			List<String> loc5 = Arrays.asList("G5","G6");
 
-			Ship ship1 = new Ship("destroyer", loc1);
-			Ship ship2 = new Ship("carrier", loc2);
-			Ship ship3 = new Ship("submarine",loc3);
-			Ship ship4 = new Ship("battleship",loc4);
-			Ship ship5 = new Ship("patrolBoat", loc5);
+			Ship ship1 = new Ship("destroyer");
+			ship1.setLocation(loc1);
+//			Ship ship2 = new Ship("carrier", loc2);
+//			Ship ship3 = new Ship("submarine",loc3);
+//			Ship ship4 = new Ship("battleship",loc4);
+//			Ship ship5 = new Ship("patrolBoat", loc5);
 
 			shiprepository.save(ship1);
-			shiprepository.save(ship2);
-			shiprepository.save(ship3);
-			shiprepository.save(ship4);
-			shiprepository.save(ship5);
+			gamePlayer1.addShip(ship1);
+//			gamePlayer1.addShip(ship2);
+//			gamePlayer1.addShip(ship3);
+//			gamePlayer1.addShip(ship4);
+//			gamePlayer1.addShip(ship5);
+
+
+			gameplayerrepository.save(gamePlayer1);
+			gameplayerrepository.save(gamePlayer2);
+//			shiprepository.save(ship2);
+//			shiprepository.save(ship3);
+//			shiprepository.save(ship4);
+//			shiprepository.save(ship5);
 
 
 		};
