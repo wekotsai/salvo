@@ -1,5 +1,7 @@
 package com.codeoftheweb.salvo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,27 +24,33 @@ public class SalvoController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @RequestMapping("/gameplayers")
+    @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
         return gameplayerrepository.findAll();
     }
 
-    @RequestMapping("/players")
+    @GetMapping("/players")
     public List<Player> getPlayers() {
         return playerRepository.findAll();
     }
 
-    @RequestMapping("/games")
+    @GetMapping("/games")
     public List<Object> getGames() {
        return gameRepository.findAll().stream().map(game -> gameMap(game)).collect(toList());
     }
+
+    @GetMapping("/game_view/{nn}")
+    public Object getGameView(@PathVariable Long nn) {
+        return gameRepository.findById(nn);
+    }
+
 
     private Map<String, Object> gameMap(Game game) {
         Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
         gamemap.put("id", game.getId());
         gamemap.put("created", game.getDate());
         gamemap.put("gamePlayer", gameplayerSet(game.gamePlayer));
-       gamemap.put("ships", game.gamePlayer.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
+        gamemap.put("ships", game.gamePlayer.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
         return gamemap;
     }
 
