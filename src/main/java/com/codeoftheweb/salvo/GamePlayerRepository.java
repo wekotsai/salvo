@@ -5,4 +5,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface GamePlayerRepository extends JpaRepository<GamePlayer, Long>{
+    GamePlayer findById(long id);
 }

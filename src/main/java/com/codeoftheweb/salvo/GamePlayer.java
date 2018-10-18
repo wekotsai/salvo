@@ -1,5 +1,7 @@
 package com.codeoftheweb.salvo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -55,6 +57,7 @@ public class GamePlayer {
         this.id = id;
     }
 
+    @JsonIgnore
     public Game getGames() {
         return this.game;
     }

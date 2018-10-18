@@ -20,13 +20,13 @@ public class SalvoController {
     @Autowired
     private GameRepository gameRepository;
     @Autowired
-    private GamePlayerRepository gameplayerrepository;
+    private GamePlayerRepository gameplayerrepo;
     @Autowired
     private PlayerRepository playerRepository;
 
     @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
-        return gameplayerrepository.findAll();
+        return gameplayerrepo.findAll();
     }
 
     @GetMapping("/players")
@@ -41,9 +41,14 @@ public class SalvoController {
 
     @GetMapping("/game_view/{nn}")
     public Object getGameView(@PathVariable Long nn) {
-        return gameRepository.findById(nn);
+        return gameplayerrepo.findById(nn);
     }
 
+//    @GetMapping("/game_view/{nn}")
+//    public Map<String, Object> getGameView(@PathVariable long nn) {
+//        GamePlayer currentGP = gameplayerrepo.findById(nn);
+//        return getGameView(nn);
+//    }
 
     private Map<String, Object> gameMap(Game game) {
         Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
@@ -79,7 +84,5 @@ public class SalvoController {
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayer) {
         return gamePlayer.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
     }
-
-
 
 }

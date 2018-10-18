@@ -1,5 +1,6 @@
 package com.codeoftheweb.salvo;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.List;
 
@@ -30,13 +31,9 @@ public class Ship {
 
     public Ship() {}
 
-    public Ship(String type) {
+    public Ship(String type, GamePlayer gamePlayer) {
         this.type = type;
-    }
-
-    public Ship(String type, List<String> location) {
-        this.type = type;
-        this.location = location;
+        this.gamePlayer = gamePlayer;
     }
 
     public void setGamePlayer(GamePlayer gamePlayer) {
