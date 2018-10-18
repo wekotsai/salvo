@@ -22,10 +22,10 @@ public class SalvoApplication {
 									  GamePlayerRepository gameplayerrepository,
 									  ShipRepository shiprepository) {
 		return (args) -> {
-			Player player1 = new Player ("Jack Bauer", "j.bauer@ctu.gov");
-			Player player2 = new Player ("Chloe O'Brian", "c.obrian@ctu.gov");
-			Player player3 = new Player ("Kim Bauer", "kim_bauer@gmail.gov");
-			Player player4 = new Player ("Tony Almeida", "t.almeida@ctu.gov");
+			Player player1 = new Player ( "j.bauer@ctu.gov");
+			Player player2 = new Player ( "c.obrian@ctu.gov");
+			Player player3 = new Player ("kim_bauer@gmail.gov");
+			Player player4 = new Player ( "t.almeida@ctu.gov");
 
 			playerrepository.save(player1);
 			playerrepository.save(player2);
@@ -72,14 +72,6 @@ public class SalvoApplication {
 			gamePlayer1.addShip(ship4);
 			shiprepository.save(ship5);
 			gamePlayer1.addShip(ship5);
-
-
-
-
-
-
-
-
 
 		};
 	}

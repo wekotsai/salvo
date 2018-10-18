@@ -5,5 +5,4 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface PlayerRepository extends JpaRepository<Player, Long> {
-    Player findByUserName(String userName);
 }

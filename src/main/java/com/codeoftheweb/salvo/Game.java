@@ -1,12 +1,10 @@
 package com.codeoftheweb.salvo;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-//import java.sql.Date;
 
 @Entity
 public class Game {
@@ -17,11 +15,9 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    //@JsonIgnore
-    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
-    Set<GamePlayer> gamePlayer;
 
-    //private List<String> ship;
+    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
+    Set<GamePlayer> gamePlayers;
 
     public Game() {
     }
@@ -43,18 +39,11 @@ public class Game {
     }
 
     public Set<GamePlayer> getGamePlayer() {
-        return gamePlayer;
+        return gamePlayers;
     }
 
-    public void setGamePlayer(Set<GamePlayer> gamePlayer) {
-        this.gamePlayer = gamePlayer;
-    }
-
-//    public List<String> getShip() {
-//        return ship;
-//    }
-//
-//    public void setShip(List<String> ship) {
-//        this.ship = ship;
+//    public void addGamePlayer(GamePlayer gamePlayer) {
+//        gamePlayer.setGame(this);
+//        gamePlayers.add(gamePlayer);
 //    }
 }

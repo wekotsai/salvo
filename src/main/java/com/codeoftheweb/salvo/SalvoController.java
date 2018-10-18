@@ -29,10 +29,10 @@ public class SalvoController {
         return gameplayerrepo.findAll();
     }
 
-    @GetMapping("/players")
-    public List<Player> getPlayers() {
-        return playerRepository.findAll();
-    }
+//    @GetMapping("/players")
+//    public List<Player> getPlayers() {
+//        return playerRepository.findAll();
+//    }
 
     @GetMapping("/games")
     public List<Object> getGames() {
@@ -41,7 +41,7 @@ public class SalvoController {
 
     @GetMapping("/game_view/{nn}")
     public Object getGameView(@PathVariable Long nn) {
-        return gameplayerrepo.findById(nn);
+        return gameRepository.findById(nn);
     }
 
 //    @GetMapping("/game_view/{nn}")
@@ -54,15 +54,14 @@ public class SalvoController {
         Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
         gamemap.put("id", game.getId());
         gamemap.put("created", game.getDate());
-        gamemap.put("gamePlayer", gameplayerSet(game.gamePlayer));
-        gamemap.put("ships", game.gamePlayer.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
+        gamemap.put("gamePlayer", gameplayerSet(game.gamePlayers));
+        gamemap.put("ships", game.gamePlayers.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
         return gamemap;
     }
 
     private Map<String, Object> playerMap(Player player) {
         Map<String, Object> playermap = new LinkedHashMap<String, Object>();
         playermap.put("id", player.getId());
-        playermap.put("userName", player.getUserName());
         playermap.put("email", player.getEmail());
         return playermap;
     }
@@ -81,8 +80,8 @@ public class SalvoController {
         return shipmap;
     }
 
-    private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayer) {
-        return gamePlayer.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
+    private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {
+        return gamePlayerSet.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
     }
 
 }

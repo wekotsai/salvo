@@ -1,16 +1,14 @@
 package com.codeoftheweb.salvo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity
 public class Player {
 
-    private String userName;
     private String email;
 
     @Id
@@ -18,23 +16,24 @@ public class Player {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
+    public Set<GamePlayer> getGamePlayer() {
+        return gamePlayer;
+    }
+
+    public void setGamePlayer(Set<GamePlayer> gamePlayer) {
+        this.gamePlayer = gamePlayer;
+    }
+
     @OneToMany(mappedBy="player", fetch=FetchType.EAGER)
+    @JsonIgnore
     Set<GamePlayer> gamePlayer;
 
     public Player() { }
 
-    public Player(String userName, String email) {
-        this.userName = userName;
+    public Player(String email) {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
     public String getEmail() {
         return email;
     }
@@ -49,7 +48,12 @@ public class Player {
         this.email = email;
     }
 
-    public String toString() {
-        return userName + " ";
+    public void addPlayer(GamePlayer gamePlayer) {
+        gamePlayer.setPlayer(this);
+        Player.add(gamePlayer);
     }
+
+    private static void add(GamePlayer gamePlayer) {
+    }
+
 }
