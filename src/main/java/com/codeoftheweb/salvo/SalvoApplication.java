@@ -51,27 +51,27 @@ public class SalvoApplication {
 			List<String> loc4 = Arrays.asList("E8","F8","G8","H8");
 			List<String> loc5 = Arrays.asList("G5","G6");
 
-			Ship ship1 = new Ship("destroyer", gamePlayer1);
+			Ship ship1 = new Ship("destroyer", game1);
 			ship1.setLocation(loc1);
-			Ship ship2 = new Ship("carrier", gamePlayer1);
+            shiprepository.save(ship1);
+			Ship ship2 = new Ship("carrier", game1);
 			ship2.setLocation(loc2);
-			Ship ship3 = new Ship("submarine", gamePlayer1);
+            shiprepository.save(ship2);
+			Ship ship3 = new Ship("submarine", game1);
 			ship3.setLocation(loc3);
-			Ship ship4 = new Ship("battleship", gamePlayer1);
+            shiprepository.save(ship3);
+			Ship ship4 = new Ship("battleship", game1);
 			ship4.setLocation(loc4);
-			Ship ship5 = new Ship("patrolBoat", gamePlayer1);
+            shiprepository.save(ship4);
+			Ship ship5 = new Ship("patrolBoat", game1);
 			ship5.setLocation(loc5);
+            shiprepository.save(ship5);
 
-			shiprepository.save(ship1);
-			gamePlayer1.addShip(ship1);
-			shiprepository.save(ship2);
-			gamePlayer1.addShip(ship2);
-			shiprepository.save(ship3);
-			gamePlayer1.addShip(ship3);
-			shiprepository.save(ship4);
-			gamePlayer1.addShip(ship4);
-			shiprepository.save(ship5);
-			gamePlayer1.addShip(ship5);
+//            game1.addShip(ship1);
+//            game1.addShip(ship2);
+//            game1.addShip(ship3);
+//            game1.addShip(ship4);
+//            game1.addShip(ship5);
 
 		};
 	}

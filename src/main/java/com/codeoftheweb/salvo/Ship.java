@@ -1,6 +1,8 @@
 package com.codeoftheweb.salvo;
 
 //import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +16,9 @@ public class Ship {
     private long id;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="gamePlayer_id")
-    private GamePlayer gamePlayer;
+    @JoinColumn(name="game_id")
+    @JsonIgnore
+    private Game game;
 
     @ElementCollection
     @Column(name = "location")
@@ -31,13 +34,13 @@ public class Ship {
 
     public Ship() {}
 
-    public Ship(String type, GamePlayer gamePlayer) {
+    public Ship(String type, Game game) {
         this.type = type;
-        this.gamePlayer = gamePlayer;
+        this.game = game;
     }
 
-    public void setGamePlayer(GamePlayer gamePlayer) {
-        this.gamePlayer = gamePlayer;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public String getType() {

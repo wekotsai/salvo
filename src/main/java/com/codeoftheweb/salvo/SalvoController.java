@@ -55,7 +55,7 @@ public class SalvoController {
         gamemap.put("id", game.getId());
         gamemap.put("created", game.getDate());
         gamemap.put("gamePlayer", gameplayerSet(game.gamePlayers));
-        gamemap.put("ships", game.gamePlayers.stream().map(gamePlayer -> gamePlayer.getShips()).collect(toList()));
+        gamemap.put("ships", shipSet(game.ships));
         return gamemap;
     }
 
@@ -82,6 +82,10 @@ public class SalvoController {
 
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {
         return gamePlayerSet.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
+    }
+
+    private List<Map<String, Object>> shipSet (Set<Ship> shipSet) {
+        return shipSet.stream().map(ship -> shipMap(ship)).collect(Collectors.toList());
     }
 
 }

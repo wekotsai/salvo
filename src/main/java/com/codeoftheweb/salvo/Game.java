@@ -3,6 +3,7 @@ package com.codeoftheweb.salvo;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,17 @@ import java.util.Set;
 public class Game {
 
     private ZonedDateTime date = ZonedDateTime.now();
+
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
+
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    Set<Ship> ships;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,5 +57,10 @@ public class Game {
     public void addGamePlayer(GamePlayer gamePlayer) {
         gamePlayer.setGame(this);
         gamePlayers.add(gamePlayer);
+    }
+
+    public void addShip (Ship shipIn) {
+        shipIn.setGame(this);
+        ships.add(shipIn);
     }
 }
