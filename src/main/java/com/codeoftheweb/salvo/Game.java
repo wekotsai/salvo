@@ -42,8 +42,8 @@ public class Game {
         return gamePlayers;
     }
 
-//    public void addGamePlayer(GamePlayer gamePlayer) {
-//        gamePlayer.setGame(this);
-//        gamePlayers.add(gamePlayer);
-//    }
+    public void addGamePlayer(GamePlayer gamePlayer) {
+        gamePlayer.setGame(this);
+        gamePlayers.add(gamePlayer);
+    }
 }
