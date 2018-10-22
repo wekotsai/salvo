@@ -11,8 +11,6 @@ fetch('http://localhost:8080/api/game_view/1')
         console.log(myShips);
     });
 
-// window.onload = () => {
-
 function printShips(myShips) {
 
 
@@ -29,28 +27,14 @@ function printShips(myShips) {
                 y.innerHTML= row[r] + col[c];
             } else {
                 y.setAttribute("id",`${row[r]}${c}`);
-
-                // myShips.forEach(ship => {
-                //    if (ship === `${col[r]}${row[c]}`){
-                //        y.innerHTML = 'X';
-                //
-                //    }
-                //     console.log(`${col[r]}${row[c]}`); console.log(ship);
-                // });
             }
         }
     }
-    // for (i = 0; i < myShips.length; i++){
-    //     for (j = 0; j < myShips.location.length; j++);
-    //     document.getElementById('location').innerHTML = 'x';
-    // }
-
     myShips.forEach(ship => {
         ship.location.forEach(oneLocation => {
             console.log(oneLocation);
             document.querySelector(`#${ oneLocation }`).classList.add('ship')
         })
     });
-
 }
 
