@@ -9,10 +9,26 @@ fetch('http://localhost:8080/api/game_view/1')
         myShips = myJson.ships;
         printShips(myShips);
         console.log(myShips);
+        myGP = myJson.gamePlayer;
+        getGP(myGP);
+        console.log(myGP);
+
     });
 
-function printShips(myShips) {
+function getGP(myGP) {
+    var template = '';
 
+    myGP.forEach(GP => {
+        template += `
+<p>ID: ${GP.id}</p>
+<p>Username: ${GP.player.email}</p>
+`;
+    });
+   var email = document.getElementById('email');
+   email.innerHTML = template;
+}
+
+function printShips(myShips) {
 
     row = ["","A", "B", "C", "D", "E","F","G","H","I","J"];
     col = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -32,9 +48,7 @@ function printShips(myShips) {
     }
     myShips.forEach(ship => {
         ship.location.forEach(oneLocation => {
-            console.log(oneLocation);
             document.querySelector(`#${ oneLocation }`).classList.add('ship')
         })
     });
 }
-
