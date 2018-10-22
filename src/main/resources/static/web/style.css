@@ -1,0 +1,9 @@
+.ship{
+  background-color: red;
+}
+
+#myTable {
+  display: table;
+  width: 250px;
+  table-layout: fixed;
+}
