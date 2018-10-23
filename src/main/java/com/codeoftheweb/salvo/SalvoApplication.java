@@ -50,7 +50,13 @@ public class SalvoApplication {
 			List<String> loc3 = Arrays.asList("I1","I2","I3");
 			List<String> loc4 = Arrays.asList("E8","F8","G8","H8");
 			List<String> loc5 = Arrays.asList("G5","G6");
+            List<String> loc6 = Arrays.asList("H2", "I2", "J2");
+            List<String> loc7 = Arrays.asList("C1","C2","C3","C4","C5");
+            List<String> loc8 = Arrays.asList("I5","I6","I7");
+            List<String> loc9 = Arrays.asList("B8","B8","B8","B8");
+            List<String> loc10 = Arrays.asList("F4","F5");
 
+			// game 1
 			Ship ship1 = new Ship("destroyer", game1);
 			ship1.setLocation(loc1);
             shiprepository.save(ship1);
@@ -67,6 +73,22 @@ public class SalvoApplication {
 			ship5.setLocation(loc5);
             shiprepository.save(ship5);
 
+            // game 2
+            Ship shipA = new Ship("destroyer", game2);
+            shipA.setLocation(loc6);
+            shiprepository.save(shipA);
+            Ship shipB = new Ship("carrier", game2);
+            shipB.setLocation(loc7);
+            shiprepository.save(shipB);
+            Ship shipC = new Ship("submarine", game2);
+            shipC.setLocation(loc8);
+            shiprepository.save(shipC);
+            Ship shipD = new Ship("battleship", game2);
+            shipD.setLocation(loc9);
+            shiprepository.save(shipD);
+            Ship shipE = new Ship("patrolBoat", game2);
+            shipE.setLocation(loc10);
+            shiprepository.save(shipE);
 //            game1.addShip(ship1);
 //            game1.addShip(ship2);
 //            game1.addShip(ship3);

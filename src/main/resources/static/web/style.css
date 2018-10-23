@@ -6,4 +6,5 @@
   display: table;
   width: 250px;
   table-layout: fixed;
+  text-align: center;
 }

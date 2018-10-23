@@ -1,6 +1,9 @@
 myShips = [];
 
-fetch('http://localhost:8080/api/game_view/1')
+let url = new URLSearchParams(window.location.search);
+var id = url.get('gp');
+
+fetch(`../api/game_view/${id}`)
     .then(function (response) {
         return response.json();
     })
@@ -16,14 +19,15 @@ fetch('http://localhost:8080/api/game_view/1')
     });
 
 function getGP(myGP) {
-    var template = '';
 
-    myGP.forEach(GP => {
+    var template = '';
+    myGP.forEach(gp => {
         template += `
-<p>ID: ${GP.id}</p>
-<p>Username: ${GP.player.email}</p>
-`;
+        <p>Username: ${gp.player.email}</p>
+        <p>${ gp.player.id.toString() === id ? "Player" : "Viewer"}</p>
+       `;
     });
+    console.log('weko: ' + id);
    var email = document.getElementById('email');
    email.innerHTML = template;
 }
