@@ -69,9 +69,9 @@ public class SalvoApplication {
             Salvo salvo1 = new Salvo(1, locA);
             gamePlayer1.addSalvo(salvo1);
             salvorepository.save(salvo1);
-//            Salvo salvo2 = new Salvo(2, locB);
-//            gamePlayer1.addSalvo(salvo2);
-//            salvorepository.save(salvo2);
+            Salvo salvo2 = new Salvo(2, locB);
+            gamePlayer1.addSalvo(salvo2);
+            salvorepository.save(salvo2);
 
 
 			Ship ship1 = new Ship("destroyer", loc1);
