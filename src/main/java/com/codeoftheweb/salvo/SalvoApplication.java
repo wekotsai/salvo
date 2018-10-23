@@ -45,6 +45,11 @@ public class SalvoApplication {
 			gameplayerrepository.save(gamePlayer1);
 			gameplayerrepository.save(gamePlayer2);
 
+            GamePlayer gamePlayerA = new GamePlayer( game2, player1);
+            GamePlayer gamePlayerB = new GamePlayer( game2, player2);
+            gameplayerrepository.save(gamePlayerA);
+            gameplayerrepository.save(gamePlayerB);
+
 			List<String> loc1 = Arrays.asList("D3", "E3", "F3");
 			List<String> loc2 = Arrays.asList("B5","B6","B7","B8","B9");
 			List<String> loc3 = Arrays.asList("I1","I2","I3");
@@ -89,11 +94,6 @@ public class SalvoApplication {
             Ship shipE = new Ship("patrolBoat", game2);
             shipE.setLocation(loc10);
             shiprepository.save(shipE);
-//            game1.addShip(ship1);
-//            game1.addShip(ship2);
-//            game1.addShip(ship3);
-//            game1.addShip(ship4);
-//            game1.addShip(ship5);
 
 		};
 	}

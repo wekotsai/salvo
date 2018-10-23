@@ -24,10 +24,10 @@ function getGP(myGP) {
     myGP.forEach(gp => {
         template += `
         <p>Username: ${gp.player.email}</p>
+        <!-- if gp.player.id = url id, display(?) "Player" else(:) "Viewer" -->
         <p>${ gp.player.id.toString() === id ? "Player" : "Viewer"}</p>
        `;
     });
-    console.log('weko: ' + id);
    var email = document.getElementById('email');
    email.innerHTML = template;
 }
