@@ -21,7 +21,27 @@ public class GamePlayer {
     @JsonIgnore
     private Game game;
 
+    public Set<Salvo> getSalvoes() {
+        return salvoes;
+    }
 
+    public void setSalvoes(Set<Salvo> salvoes) {
+        this.salvoes = salvoes;
+    }
+
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(Set<Ship> ships) {
+        this.ships = ships;
+    }
+
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    private Set<Salvo> salvoes = new HashSet<>();
+
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    private Set<Ship> ships = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +53,16 @@ public class GamePlayer {
         this.game = game;
         this.player = player;
         this.date = new Date();
+    }
+
+    public void addShip (Ship shipIn) {
+        shipIn.setGamePlayer(this);
+        ships.add(shipIn);
+    }
+
+    public void addSalvo (Salvo salvoIn) {
+        salvoIn.setGamePlayer(this);
+        salvoes.add(salvoIn);
     }
 
     public long getId() {
@@ -66,5 +96,7 @@ public class GamePlayer {
         this.player = player;
     }
 
-
+    public Game getGame() {
+        return game;
+    }
 }

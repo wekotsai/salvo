@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 @RestController
 @RequestMapping("/api")
 public class SalvoController {
@@ -29,34 +27,20 @@ public class SalvoController {
         return gameplayerrepo.findAll();
     }
 
-//    @GetMapping("/players")
-//    public List<Player> getPlayers() {
-//        return playerRepository.findAll();
-//    }
-
-    @GetMapping("/games")
-    public List<Object> getGames() {
-       return gameRepository.findAll().stream().map(game -> gameMap(game)).collect(toList());
-    }
-
     @GetMapping("/game_view/{nn}")
-    public Object getGameView(@PathVariable Long nn) {
-        return gameRepository.findById(nn);
+    public Map<String, Object> getGameView(@PathVariable Long nn) {
+        return gamePMap(gameplayerrepo.findById(nn).get());
     }
 
-//    @GetMapping("/game_view/{nn}")
-//    public Map<String, Object> getGameView(@PathVariable long nn) {
-//        GamePlayer currentGP = gameplayerrepo.findById(nn);
-//        return getGameView(nn);
-//    }
 
-    private Map<String, Object> gameMap(Game game) {
-        Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
-        gamemap.put("id", game.getId());
-        gamemap.put("created", game.getDate());
-        gamemap.put("gamePlayer", gameplayerSet(game.gamePlayers));
-        gamemap.put("ships", shipSet(game.ships));
-        return gamemap;
+    private Map<String, Object> gamePMap(GamePlayer gameplayer) {
+        Map<String, Object> gamepmap = new LinkedHashMap<String, Object>();
+        gamepmap.put("id", gameplayer.getId());
+        gamepmap.put("created", gameplayer.getDate());
+        gamepmap.put("gamePlayer", gameplayerSet(gameplayer.getGames().gamePlayers));
+        gamepmap.put("ships", shipSet(gameplayer.getShips()));
+        gamepmap.put("salvo", salvoSet(gameplayer.getSalvoes()));
+        return gamepmap;
     }
 
     private Map<String, Object> playerMap(Player player) {
@@ -80,6 +64,13 @@ public class SalvoController {
         return shipmap;
     }
 
+    private Map<String, Object> salvoMap(Salvo salvo) {
+        Map<String, Object> salvomap = new LinkedHashMap<String, Object>();
+        salvomap.put("turn", salvo.getTurn());
+        salvomap.put("location", salvo.getLocation());
+        return salvomap;
+    }
+
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {
         return gamePlayerSet.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
     }
@@ -88,4 +79,7 @@ public class SalvoController {
         return shipSet.stream().map(ship -> shipMap(ship)).collect(Collectors.toList());
     }
 
+    private List<Map<String, Object>> salvoSet (Set<Salvo> salvoSet) {
+        return salvoSet.stream().map(salvo -> salvoMap(salvo)).collect(Collectors.toList());
+    }
 }

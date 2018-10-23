@@ -4,8 +4,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +18,9 @@ public class SalvoApplication {
 	public CommandLineRunner initData(PlayerRepository playerrepository,
 									  GameRepository gamerepository,
 									  GamePlayerRepository gameplayerrepository,
-									  ShipRepository shiprepository) {
+									  ShipRepository shiprepository,
+                                      SalvoRepository salvorepository) {
+
 		return (args) -> {
 			Player player1 = new Player ( "j.bauer@ctu.gov");
 			Player player2 = new Player ( "c.obrian@ctu.gov");
@@ -55,44 +55,55 @@ public class SalvoApplication {
 			List<String> loc3 = Arrays.asList("I1","I2","I3");
 			List<String> loc4 = Arrays.asList("E8","F8","G8","H8");
 			List<String> loc5 = Arrays.asList("G5","G6");
+
             List<String> loc6 = Arrays.asList("H2", "I2", "J2");
             List<String> loc7 = Arrays.asList("C1","C2","C3","C4","C5");
             List<String> loc8 = Arrays.asList("I5","I6","I7");
             List<String> loc9 = Arrays.asList("B8","B8","B8","B8");
             List<String> loc10 = Arrays.asList("F4","F5");
 
-			// game 1
-			Ship ship1 = new Ship("destroyer", game1);
-			ship1.setLocation(loc1);
+            List<String> locA = Arrays.asList("B5","C5", "F1");
+            List<String> locB = Arrays.asList("F2","D5");
+
+
+            Salvo salvo1 = new Salvo(1, locA);
+            gamePlayer1.addSalvo(salvo1);
+            salvorepository.save(salvo1);
+//            Salvo salvo2 = new Salvo(2, locB);
+//            gamePlayer1.addSalvo(salvo2);
+//            salvorepository.save(salvo2);
+
+
+			Ship ship1 = new Ship("destroyer", loc1);
+			gamePlayer1.addShip(ship1);
             shiprepository.save(ship1);
-			Ship ship2 = new Ship("carrier", game1);
-			ship2.setLocation(loc2);
+			Ship ship2 = new Ship("carrier", loc2);
+            gamePlayer1.addShip(ship2);
             shiprepository.save(ship2);
-			Ship ship3 = new Ship("submarine", game1);
-			ship3.setLocation(loc3);
+			Ship ship3 = new Ship("submarine", loc3);
+            gamePlayer1.addShip(ship3);
             shiprepository.save(ship3);
-			Ship ship4 = new Ship("battleship", game1);
-			ship4.setLocation(loc4);
+			Ship ship4 = new Ship("battleship", loc4);
+            gamePlayer1.addShip(ship4);
             shiprepository.save(ship4);
-			Ship ship5 = new Ship("patrolBoat", game1);
-			ship5.setLocation(loc5);
+			Ship ship5 = new Ship("patrolBoat", loc5);
+            gamePlayer1.addShip(ship5);
             shiprepository.save(ship5);
 
-            // game 2
-            Ship shipA = new Ship("destroyer", game2);
-            shipA.setLocation(loc6);
+            Ship shipA = new Ship("destroyer", loc6);
+            gamePlayer2.addShip(shipA);
             shiprepository.save(shipA);
-            Ship shipB = new Ship("carrier", game2);
-            shipB.setLocation(loc7);
+            Ship shipB = new Ship("carrier", loc7);
+            gamePlayer2.addShip(shipB);
             shiprepository.save(shipB);
-            Ship shipC = new Ship("submarine", game2);
-            shipC.setLocation(loc8);
+            Ship shipC = new Ship("submarine", loc8);
+            gamePlayer2.addShip(shipC);
             shiprepository.save(shipC);
-            Ship shipD = new Ship("battleship", game2);
-            shipD.setLocation(loc9);
+            Ship shipD = new Ship("battleship", loc9);
+            gamePlayer2.addShip(shipD);
             shiprepository.save(shipD);
-            Ship shipE = new Ship("patrolBoat", game2);
-            shipE.setLocation(loc10);
+            Ship shipE = new Ship("patrolBoat", loc10);
+            gamePlayer2.addShip(shipE);
             shiprepository.save(shipE);
 
 		};
