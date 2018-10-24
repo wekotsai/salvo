@@ -31,7 +31,7 @@ function getGP(myGP) {
         template += `
         <p> Username: ${gp.player.email} </p>
         <!-- if gp.player.id = url id, ?(display) "Player" :(else) "Viewer" -->
-        <p> ${ gp.player.id.toString() === id ? "(Player)" : " (Viewer)"} </p>
+        <p> ${ gp.player.id.toString() === id ? "(Player)" : "(Viewer)"} </p>
        `;
     });
    var email = document.getElementById('email');
@@ -77,7 +77,7 @@ function name(my, opponent, shit, table) {
     });
 }
 
-    function name1(my, salvo, shit, table) {
+    function name1(my, salvo, vrbl, table) {
         // print ship location
         my.forEach(ship => {
             let checked = [];
@@ -87,16 +87,10 @@ function name(my, opponent, shit, table) {
                             if (location1 == location2) {
                                 document.getElementById(table).querySelector(`#${ location1 }`).classList.add("hit")
                             } else {
-                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add(shit)
+                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add(vrbl)
                             }
                         })
                     })
                 })
 
         };
-
-    // mySalvoes.forEach(salvo => {
-    //     salvo.location.forEach(location2 => {
-    //         document.getElementById(table).querySelector(`#${ location2 }`).classList.add("salvo")
-    //     })
-    // })
