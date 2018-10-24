@@ -2,9 +2,7 @@ package com.codeoftheweb.salvo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -39,6 +37,26 @@ public class GamePlayer {
 
     public Set<Ship> getOpponentsShips(GamePlayer gamePlayer){
         return this.getGame().getOpponent(gamePlayer).getShips();
+    }
+
+    public List<String> oppoShipList(GamePlayer gamePlayer){
+        List<String> oppoShipList = new ArrayList<>();
+        for (Ship ship: getOpponentsShips(this)){
+            for (String location: ship.getLocation()){
+                oppoShipList.add(location);
+            }
+        }
+        return oppoShipList;
+    }
+
+    public List<String> salvoList(GamePlayer gamePlayer){
+        List<String> salvoList = new ArrayList<>();
+        for (Salvo salvo: getSalvoes()){
+            for (String location: salvo.getLocation()){
+                salvoList.add(location);
+            }
+        }
+        return salvoList;
     }
 
 

@@ -6,15 +6,24 @@
   background-color: limegreen;
 }
 
+h1, p {
+  display: flex;
+  justify-content: center;
+}
+
 .tables{
   display: flex;
   justify-content: space-around;
 }
 
+.hit{
+  background-color: red;
+}
+
 #myTable {
   display: table;
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
   table-layout: fixed;
   text-align: center;
   background-color: midnightblue;
@@ -24,8 +33,8 @@
 
 #salvoTable {
   display: table;
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
   table-layout: fixed;
   text-align: center;
   background-color: darkslategrey;

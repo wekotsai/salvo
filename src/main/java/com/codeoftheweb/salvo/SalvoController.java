@@ -5,10 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -49,7 +46,7 @@ public class SalvoController {
         gamepmap.put("gamePlayer", gameplayerSet(gameplayer.getGames().gamePlayers));
         gamepmap.put("ships", shipSet(gameplayer.getShips()));
         gamepmap.put("salvoes", salvoSet(gameplayer.getSalvoes()));
-        gamepmap.put("opponentsShips", shipSet(gameplayer.getOpponentsShips(gameplayer)));
+        gamepmap.put("hitTheOpp", hitTheOpp(gameplayer));
         gamepmap.put("opponentsSalvoes", salvoSet(gameplayer.getOpponentsSalvoes(gameplayer)));
         return gamepmap;
     }
@@ -93,5 +90,19 @@ public class SalvoController {
 
     private List<Map<String, Object>> salvoSet (Set<Salvo> salvoSet) {
         return salvoSet.stream().map(salvo -> salvoMap(salvo)).collect(toList());
+    }
+
+    public List<String> hitTheOpp(GamePlayer gamePlayer){
+        List<String> hitTheOpp = new ArrayList<>();
+        for (String shipLoc: gamePlayer.oppoShipList(gamePlayer)){
+            for (String salvoLoc: gamePlayer.salvoList(gamePlayer)){
+                if (shipLoc == salvoLoc) {
+                  if (!hitTheOpp.contains(shipLoc)) {
+                      hitTheOpp.add(shipLoc);
+                  }
+                }
+            }
+        }
+        return hitTheOpp;
     }
 }
