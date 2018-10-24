@@ -1,4 +1,5 @@
 myShips = [];
+mySalvoes = [];
 
 let url = new URLSearchParams(window.location.search);
 var id = url.get('gp');
@@ -10,11 +11,11 @@ fetch(`../api/game_view/${id}`)
     .then(function (myJson) {
 
         myShips = myJson.ships;
-        printShips(myShips);
-        console.log(myShips);
+        printShips(myShips, "myTable", "ship");
         myGP = myJson.gamePlayer;
         getGP(myGP);
-        console.log(myGP);
+        mySalvoes = myJson.salvoes;
+        printShips(mySalvoes, "salvoTable", "salvo");
 
     });
 
@@ -32,27 +33,28 @@ function getGP(myGP) {
    email.innerHTML = template;
 }
 
-function printShips(myShips) {
+function printShips(myShips, table, what) {
 
     row = ["","A", "B", "C", "D", "E","F","G","H","I","J"];
     col = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    for (var r = 0; r < row.length; r++)
-    {
-        var x = document.getElementById('myTable').insertRow(r);
-        for (var c = 0; c < col.length; c++)
-        {
-            var y =  x.insertCell(c);
-            if (r === 0 || c === 0) {
-                y.innerHTML= row[r] + col[c];
-            } else {
-                y.setAttribute("id",`${row[r]}${c}`);
+    for (var r = 0; r < row.length; r++) {
+            var x = document.getElementById(table).insertRow(r);
+            for (var c = 0; c < col.length; c++) {
+                var y = x.insertCell(c);
+                if (r === 0 || c === 0) {
+                    y.innerHTML = row[r] + col[c];
+                } else {
+                    y.setAttribute("id", `${row[r]}${c}`);
+                }
             }
-        }
     }
+
     myShips.forEach(ship => {
         ship.location.forEach(oneLocation => {
-            document.querySelector(`#${ oneLocation }`).classList.add('ship')
+            document.getElementById(table).querySelector(`#${ oneLocation }`).classList.add(what)
         })
     });
+
+
 }
