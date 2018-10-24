@@ -33,7 +33,7 @@ function getGP(myGP) {
    email.innerHTML = template;
 }
 
-function printShips(myShips, table, what) {
+function printShips(myShips, table, tab) {
 
     row = ["","A", "B", "C", "D", "E","F","G","H","I","J"];
     col = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -52,9 +52,7 @@ function printShips(myShips, table, what) {
 
     myShips.forEach(ship => {
         ship.location.forEach(oneLocation => {
-            document.getElementById(table).querySelector(`#${ oneLocation }`).classList.add(what)
+            document.getElementById(table).querySelector(`#${ oneLocation }`).classList.add(tab)
         })
     });
-
-
 }

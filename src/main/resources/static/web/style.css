@@ -6,9 +6,12 @@
   background-color: limegreen;
 }
 
+.tables{
+  display: flex;
+  justify-content: space-around;
+}
+
 #myTable {
-  /* display: flex;
-  align-content: space-around; */
   display: table;
   width: 350px;
   height: 350px;
