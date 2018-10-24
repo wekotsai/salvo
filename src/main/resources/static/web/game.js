@@ -77,7 +77,7 @@ function name(my, opponent, shit, table) {
     });
 }
 
-    function name1(my, salvo, vrbl, table) {
+    function name1(my, salvo, someVar, table) {
         // print ship location
         my.forEach(ship => {
             let checked = [];
@@ -87,7 +87,7 @@ function name(my, opponent, shit, table) {
                             if (location1 == location2) {
                                 document.getElementById(table).querySelector(`#${ location1 }`).classList.add("hit")
                             } else {
-                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add(vrbl)
+                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add(someVar)
                             }
                         })
                     })
