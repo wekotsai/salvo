@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 @RequestMapping("/api")
 public class SalvoController {
@@ -21,10 +23,17 @@ public class SalvoController {
     private GamePlayerRepository gameplayerrepo;
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private SalvoRepository salvoRepository;
 
     @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
         return gameplayerrepo.findAll();
+    }
+
+    @GetMapping("/salvoes")
+    public List<Object> getSalvoes() {
+        return salvoRepository.findAll().stream().map(salvo -> salvoMap(salvo)).collect(toList());
     }
 
     @GetMapping("/game_view/{nn}")
@@ -40,6 +49,8 @@ public class SalvoController {
         gamepmap.put("gamePlayer", gameplayerSet(gameplayer.getGames().gamePlayers));
         gamepmap.put("ships", shipSet(gameplayer.getShips()));
         gamepmap.put("salvo", salvoSet(gameplayer.getSalvoes()));
+        gamepmap.put("opponentsShips", shipSet(gameplayer.getOpponentsShips(gameplayer)));
+        gamepmap.put("opponentsSalvoes", salvoSet(gameplayer.getOpponentsSalvoes(gameplayer)));
         return gamepmap;
     }
 
@@ -68,18 +79,19 @@ public class SalvoController {
         Map<String, Object> salvomap = new LinkedHashMap<String, Object>();
         salvomap.put("turn", salvo.getTurn());
         salvomap.put("location", salvo.getLocation());
+        salvomap.put("id", salvo.getGamePlayer().getPlayer().getId());
         return salvomap;
     }
 
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {
-        return gamePlayerSet.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(Collectors.toList());
+        return gamePlayerSet.stream().map(gameplayer -> gameplayerMap(gameplayer)).collect(toList());
     }
 
     private List<Map<String, Object>> shipSet (Set<Ship> shipSet) {
-        return shipSet.stream().map(ship -> shipMap(ship)).collect(Collectors.toList());
+        return shipSet.stream().map(ship -> shipMap(ship)).collect(toList());
     }
 
     private List<Map<String, Object>> salvoSet (Set<Salvo> salvoSet) {
-        return salvoSet.stream().map(salvo -> salvoMap(salvo)).collect(Collectors.toList());
+        return salvoSet.stream().map(salvo -> salvoMap(salvo)).collect(toList());
     }
 }

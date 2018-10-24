@@ -59,19 +59,23 @@ public class SalvoApplication {
             List<String> loc6 = Arrays.asList("H2", "I2", "J2");
             List<String> loc7 = Arrays.asList("C1","C2","C3","C4","C5");
             List<String> loc8 = Arrays.asList("I5","I6","I7");
-            List<String> loc9 = Arrays.asList("B8","B8","B8","B8");
+            List<String> loc9 = Arrays.asList("B8","C8","D8","E8");
             List<String> loc10 = Arrays.asList("F4","F5");
 
-            List<String> locA = Arrays.asList("B5","C5", "F1");
-            List<String> locB = Arrays.asList("F2","D5");
+            List<String> locA = Arrays.asList("B8","C8","F1");
+            List<String> locB = Arrays.asList("F4","D5", "E4");
+            List<String> locC = Arrays.asList("I5", "B2", "E7");
 
 
             Salvo salvo1 = new Salvo(1, locA);
             gamePlayer1.addSalvo(salvo1);
             salvorepository.save(salvo1);
-            Salvo salvo2 = new Salvo(2, locB);
-            gamePlayer1.addSalvo(salvo2);
+            Salvo salvo2 = new Salvo(1, locB);
+            gamePlayer2.addSalvo(salvo2);
             salvorepository.save(salvo2);
+            Salvo salvo3 = new Salvo(2, locC);
+            gamePlayer1.addSalvo(salvo3);
+            salvorepository.save(salvo3);
 
 
 			Ship ship1 = new Ship("destroyer", loc1);

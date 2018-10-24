@@ -20,7 +20,15 @@ public class Game {
     @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
     Set<GamePlayer> gamePlayers;
 
-    public Game() {
+    public Game() { }
+
+    public GamePlayer getOpponent(GamePlayer currentGamePlayer) {
+        for (GamePlayer otherGamePlayer: this.gamePlayers) {
+            if (currentGamePlayer.getId() != otherGamePlayer.getId()) {
+             return otherGamePlayer;
+            }
+        }
+        return null;
     }
 
     public long getId() {

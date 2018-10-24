@@ -33,6 +33,15 @@ public class GamePlayer {
         return ships;
     }
 
+    public Set<Salvo> getOpponentsSalvoes(GamePlayer gamePlayer){
+        return this.getGame().getOpponent(gamePlayer).getSalvoes();
+    }
+
+    public Set<Ship> getOpponentsShips(GamePlayer gamePlayer){
+        return this.getGame().getOpponent(gamePlayer).getShips();
+    }
+
+
     public void setShips(Set<Ship> ships) {
         this.ships = ships;
     }
