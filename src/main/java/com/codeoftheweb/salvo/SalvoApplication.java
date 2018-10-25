@@ -19,7 +19,8 @@ public class SalvoApplication {
 									  GameRepository gamerepository,
 									  GamePlayerRepository gameplayerrepository,
 									  ShipRepository shiprepository,
-                                      SalvoRepository salvorepository) {
+                                      SalvoRepository salvorepository,
+                                      ScoreRepository scorerepository) {
 
 		return (args) -> {
 			Player player1 = new Player ( "j.bauer@ctu.gov");
@@ -76,7 +77,6 @@ public class SalvoApplication {
             Salvo salvo3 = new Salvo(2, locC);
             gamePlayer1.addSalvo(salvo3);
             salvorepository.save(salvo3);
-
 
 			Ship ship1 = new Ship("destroyer", loc1);
 			gamePlayer1.addShip(ship1);
