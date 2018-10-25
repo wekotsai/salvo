@@ -28,6 +28,9 @@ public class Player {
     @JsonIgnore
     Set<GamePlayer> gamePlayer;
 
+    @OneToMany(mappedBy ="player", fetch=FetchType.EAGER)
+    Set<Score> score;
+
     public Player() { }
 
     public Player(String email) {
