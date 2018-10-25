@@ -6,6 +6,8 @@ import java.util.Date;
 @Entity
 public class Score {
 
+    private double score;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,11 +22,13 @@ public class Score {
 
     private Date finishDate;
 
-    public Score(Player player, Game game, Date finishDate, double score) {
+    public Score() {}
+
+    public Score(Player player, Game game, double score) {
         this.player = player;
         this.game = game;
-        this.finishDate = finishDate;
-        Score = score;
+        this.finishDate = new Date();
+        this.score = score;
     }
 
     public long getId() {
@@ -60,14 +64,11 @@ public class Score {
     }
 
     public double getScore() {
-        return Score;
+        return score;
     }
 
     public void setScore(double score) {
-        Score = score;
+        score = score;
     }
 
-    private double Score;
-
-    public Score() {}
 }

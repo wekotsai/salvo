@@ -57,7 +57,7 @@ function markShips(myShips, table) {
 }
 
 
-function name(my, opponent, shit, table) {
+function name(my, opponent, someVar, table) {
     // print ship location
     my.forEach(ship => {
         let checked = [];
@@ -68,7 +68,7 @@ function name(my, opponent, shit, table) {
                         if (location1 == location2) {
                             document.getElementById(table).querySelector(`#${ location1 }`).classList.add("hit")
                         } else {
-                            document.getElementById(table).querySelector(`#${ location1 }`).classList.add(shit)
+                            document.getElementById(table).querySelector(`#${ location1 }`).classList.add(someVar)
                         }
 
                 })

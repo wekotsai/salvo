@@ -126,4 +126,7 @@ public class GamePlayer {
     public Game getGame() {
         return game;
     }
+
+    public void addScore(Score score1) {
+    }
 }
