@@ -33,6 +33,23 @@ public class Player {
 
     public Player() { }
 
+    public Score getOneScore(Game game){
+        for (Score score: scores){
+            if (score.getGame() == game){
+                return score;
+            }
+        }
+        return null;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
+    }
+
     public Player(String email) {
         this.email = email;
     }

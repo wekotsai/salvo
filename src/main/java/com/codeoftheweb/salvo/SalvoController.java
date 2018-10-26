@@ -23,6 +23,11 @@ public class SalvoController {
     @Autowired
     private SalvoRepository salvoRepository;
 
+    @GetMapping("/games")
+    public List<Object> getGames(){
+        return gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList());
+    }
+
     @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
         return gameplayerrepo.findAll();
@@ -38,6 +43,11 @@ public class SalvoController {
         return gamePMap(gameplayerrepo.findById(nn).get());
     }
 
+    private Map<String, Object> gameMap(GamePlayer gamePlayer){
+        Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
+        gamemap.put("player", playerMap(gamePlayer.getPlayer()));
+        return gamemap;
+    }
 
     private Map<String, Object> gamePMap(GamePlayer gameplayer) {
         Map<String, Object> gamepmap = new LinkedHashMap<String, Object>();
@@ -55,6 +65,7 @@ public class SalvoController {
         Map<String, Object> playermap = new LinkedHashMap<String, Object>();
         playermap.put("id", player.getId());
         playermap.put("email", player.getEmail());
+        playermap.put("score", scoreSet(player.getScores()));
         return playermap;
     }
 
@@ -78,6 +89,18 @@ public class SalvoController {
         salvomap.put("location", salvo.getLocation());
         salvomap.put("id", salvo.getGamePlayer().getPlayer().getId());
         return salvomap;
+    }
+
+    private Map<String, Object> scoreMap(Score score) {
+        Map<String, Object> scoremap = new LinkedHashMap<String, Object>();
+        scoremap.put("player", score.getPlayer());
+        scoremap.put("finishDate", score.getFinishDate());
+        scoremap.put("gameScore", score.getGame().getScore(score.getPlayer()));
+        return scoremap;
+    }
+
+    private List<Map<String, Object>> scoreSet (Set<Score> score){
+        return score.stream().map(scores -> scoreMap(scores)).collect(toList());
     }
 
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {

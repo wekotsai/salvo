@@ -1,5 +1,7 @@
 package com.codeoftheweb.salvo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,10 +14,12 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @JsonIgnore
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name = "Player_id")
     private Player player;
 
+    @JsonIgnore
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name = "Game_id")
     private Game game;
@@ -63,7 +67,7 @@ public class Score {
         this.finishDate = finishDate;
     }
 
-    public double getScore() {
+    public double getScores() {
         return score;
     }
 

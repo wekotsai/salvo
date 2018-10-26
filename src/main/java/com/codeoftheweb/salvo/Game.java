@@ -24,6 +24,10 @@ public class Game {
 
     public Game() { }
 
+    public Score getScore (Player player){
+        return player.getOneScore(this);
+    }
+
     public GamePlayer getOpponent(GamePlayer currentGamePlayer) {
         for (GamePlayer otherGamePlayer: this.gamePlayers) {
             if (currentGamePlayer.getId() != otherGamePlayer.getId()) {
@@ -32,6 +36,8 @@ public class Game {
         }
         return null;
     }
+
+
 
     public long getId() {
         return id;
