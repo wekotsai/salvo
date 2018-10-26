@@ -51,7 +51,7 @@ public class SalvoController {
 
     private Map<String, Object> gamePMap(GamePlayer gameplayer) {
         Map<String, Object> gamepmap = new LinkedHashMap<String, Object>();
-        gamepmap.put("id", gameplayer.getId());
+        gamepmap.put("gp_id", gameplayer.getId());
         gamepmap.put("created", gameplayer.getDate());
         gamepmap.put("gamePlayer", gameplayerSet(gameplayer.getGames().gamePlayers));
         gamepmap.put("ships", shipSet(gameplayer.getShips()));
@@ -63,15 +63,15 @@ public class SalvoController {
 
     private Map<String, Object> playerMap(Player player) {
         Map<String, Object> playermap = new LinkedHashMap<String, Object>();
-        playermap.put("id", player.getId());
+        playermap.put("player_id", player.getId());
         playermap.put("email", player.getEmail());
-        playermap.put("score", scoreSet(player.getScores()));
+        playermap.put("player_score", scoreSet(player.getScores()));
         return playermap;
     }
 
     private Map<String, Object> gameplayerMap(GamePlayer gamePlayer) {
         Map<String, Object> gameplayermap = new LinkedHashMap<String, Object>();
-        gameplayermap.put("id", gamePlayer.getId());
+        gameplayermap.put("gp_id", gamePlayer.getId());
         gameplayermap.put("player", playerMap(gamePlayer.getPlayer()));
         return gameplayermap;
     }
@@ -87,7 +87,7 @@ public class SalvoController {
         Map<String, Object> salvomap = new LinkedHashMap<String, Object>();
         salvomap.put("turn", salvo.getTurn());
         salvomap.put("location", salvo.getLocation());
-        salvomap.put("id", salvo.getGamePlayer().getPlayer().getId());
+        salvomap.put("player_id", salvo.getGamePlayer().getPlayer().getId());
         return salvomap;
     }
 
@@ -95,7 +95,7 @@ public class SalvoController {
         Map<String, Object> scoremap = new LinkedHashMap<String, Object>();
         scoremap.put("player", score.getPlayer());
         scoremap.put("finishDate", score.getFinishDate());
-        scoremap.put("gameScore", score.getGame().getScore(score.getPlayer()));
+        scoremap.put("game_score", score.getGame().getScore(score.getPlayer()));
         return scoremap;
     }
 

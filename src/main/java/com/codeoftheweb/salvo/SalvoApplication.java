@@ -80,9 +80,12 @@ public class SalvoApplication {
             salvorepository.save(salvo3);
 
             Score score1 = new Score(player1, game1,0.5);
-            Score score2 = new Score(player2, game2,0.5);
-            Score score3 = new Score(player3, game3,0.5);
-            Score score4 = new Score(player4, game1,0.5);
+            Score score2 = new Score(player1, game2,0);
+            Score score3 = new Score(player1, game3,1);
+            Score score4 = new Score(player1, game4,0.5);
+            Score score5 = new Score(player2, game2,1);
+            Score score6 = new Score(player3, game3,1);
+            Score score7 = new Score(player4, game1,0);
 
             gamePlayer1.addScore(score1);
             scorerepository.save(score1);
