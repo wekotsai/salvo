@@ -4,7 +4,8 @@ function getData() {
      fetch('../api/games')
          .then(response => response.json())
          .then(json => {
-             console.log(json);
+             console.log("Isa: " + json);
+
              let playerList = getPlayerList(json);
              console.log("Ronn: " + playerList);
              displayScore(playerList);
@@ -31,10 +32,10 @@ function getPlayerList(json) {
         });
         total_scores = wins + (ties / 2);
         player_score = {"email": player.player.email,
-                        "Total Score": total_scores,
-                        "Wins": wins,
-                        "Ties": ties,
-                        "Losses": losses};
+                        "total_scores": total_scores,
+                        "wins": wins,
+                        "ties": ties,
+                        "losses": losses};
         playerList.push(player_score);
         console.log("TOTAL: " + JSON.stringify(playerList));
     });
