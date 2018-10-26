@@ -1,21 +1,20 @@
 getData();
 
 function getData() {
-    var data;
      fetch('../api/games')
          .then(response => response.json())
          .then(json => {
-             data = json;
              console.log(json);
-             getPlayerList(json);
-             displayScore(json);
- });
- };
-
-var playerList = [];
+             let playerList = getPlayerList(json);
+             console.log("Ronn: " + playerList);
+             displayScore(playerList);
+ })
+ }
 
 function getPlayerList(json) {
+    var playerList = [];
     json.forEach(player => {
+        console.log("Mike: " + JSON.stringify(player.player))
         let player_score = {};
         let wins = 0;
         let losses = 0;
@@ -37,40 +36,23 @@ function getPlayerList(json) {
                         "Ties": ties,
                         "Losses": losses};
         playerList.push(player_score);
-        console.log(playerList);
-    })
+        console.log("TOTAL: " + JSON.stringify(playerList));
+    });
+    return playerList;
 }
 
 function displayScore(playerList) {
-
-    var templateTest = '';
-    playerList.forEach(player => {
+   var templateTest = '';
+playerList.forEach(pl => {
              templateTest += `
-             
-             <p>${player.player.email}</p>
-             <p>${playerList.total_scores} </p>
-             <p>${playerList.wins} </p>
-             <p>${playerList.ties} </p>
-             <p>${playerList.losses}</p>
-            
+             <p>${pl.email}</p>
+             <p>${pl.total_scores} </p>
+             <p>${pl.wins} </p>
+             <p>${pl.ties} </p>
+             <p>${pl.losses}</p>
              `;
-         });
-    var games = document.getElementById('games');
-    games.innerHTML = templateTest;
-};
- // function getGames(json) {
- //
- //     var templateTest = '';
- //     json.forEach(game => {
- //              templateTest += `
- //              <ol>
- //              <li>Game: ${game.id}</li>
- //              <li>Date: ${game.created}</li>
- //              <li>Player: ${ game.gamePlayer[0] !== undefined ? game.gamePlayer[0].player.userName : "" }</li>
- //              <li>Player: ${ game.gamePlayer[1] !== undefined ? game.gamePlayer[1].player.userName : "" }</li>
- //              </ol>
- //              `;
- //          });
- //     var games = document.getElementById('games');
- //     games.innerHTML = templateTest;
- // };
+             var table = document.getElementById('table');
+             table.innerHTML = templateTest;
+         })
+}
+
