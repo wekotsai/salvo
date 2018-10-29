@@ -3,7 +3,7 @@
 }
 
 .salvo{
-  background-color: limegreen;
+  background-color: lightgreen;
 }
 
 h1, p {
@@ -37,7 +37,7 @@ h1, p {
   height: 450px;
   table-layout: fixed;
   text-align: center;
-  background-color: darkslategrey;
+  background-color: darkgreen;
   color: lightgreen;
   margin-bottom: 20px;
 }

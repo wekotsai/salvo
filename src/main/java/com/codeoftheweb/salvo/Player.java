@@ -10,6 +10,7 @@ import java.util.Set;
 public class Player {
 
     private String email;
+    private String password;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -57,6 +58,7 @@ public class Player {
     public String getEmail() {
         return email;
     }
+
     public long getId() {
         return id;
     }
@@ -64,6 +66,7 @@ public class Player {
     public void setId(long id) {
         this.id = id;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -75,5 +78,11 @@ public class Player {
 
     private static void add(GamePlayer gamePlayer) {
     }
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
