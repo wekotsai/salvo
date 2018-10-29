@@ -92,6 +92,14 @@ public class GamePlayer {
         salvoes.add(salvoIn);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public long getId() {
         return id;
     }
@@ -100,13 +108,8 @@ public class GamePlayer {
         this.id = id;
     }
 
-    @JsonIgnore
     public Game getGames() {
         return this.game;
-    }
-
-    public Player getPlayer() {
-        return this.player;
     }
 
     public Date getDate() { return date; }
@@ -117,10 +120,6 @@ public class GamePlayer {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public Game getGame() {

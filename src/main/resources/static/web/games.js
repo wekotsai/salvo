@@ -46,13 +46,15 @@ function displayScore(playerList) {
    var templateTest = '';
 playerList.forEach(pl => {
              templateTest += `
-             <p>${pl.email}</p>
-             <p>${pl.total_scores} </p>
-             <p>${pl.wins} </p>
-             <p>${pl.ties} </p>
-             <p>${pl.losses}</p>
+             <tr>
+             <td>${pl.email}</td>
+             <td>${pl.total_scores}</td>
+             <td>${pl.wins}</td>
+             <td>${pl.ties}</td>
+             <td>${pl.losses}</td>
+             </tr>
              `;
-             var table = document.getElementById('table');
+             var table = document.getElementById('myTbody');
              table.innerHTML = templateTest;
          })
 }

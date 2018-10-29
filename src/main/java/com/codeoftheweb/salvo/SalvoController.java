@@ -25,7 +25,11 @@ public class SalvoController {
 
     @GetMapping("/games")
     public List<Object> getGames(){
-        return gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList());
+        return gameplayerrepo
+                .findAll()
+                .stream()
+                .map(game -> gameMap(game))
+                .collect(toList());
     }
 
     @GetMapping("/gameplayers")
@@ -44,7 +48,7 @@ public class SalvoController {
     }
 
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
-        Map<String, Object> gamemap = new LinkedHashMap<String, Object>();
+        Map<String, Object> gamemap = new LinkedHashMap<>();
         gamemap.put("player", playerMap(gamePlayer.getPlayer()));
         return gamemap;
     }
@@ -93,14 +97,17 @@ public class SalvoController {
 
     private Map<String, Object> scoreMap(Score score) {
         Map<String, Object> scoremap = new LinkedHashMap<String, Object>();
-        scoremap.put("player", score.getPlayer());
+//        scoremap.put("player", score.getPlayer());
         scoremap.put("finishDate", score.getFinishDate());
         scoremap.put("game_score", score.getGame().getScore(score.getPlayer()));
         return scoremap;
     }
 
     private List<Map<String, Object>> scoreSet (Set<Score> score){
-        return score.stream().map(scores -> scoreMap(scores)).collect(toList());
+        return score
+                .stream()
+                .map(scores -> scoreMap(scores))
+                .collect(toList());
     }
 
     private List<Map<String, Object>> gameplayerSet (Set<GamePlayer> gamePlayerSet) {

@@ -48,10 +48,10 @@ public class SalvoApplication {
 			gameplayerrepository.save(gamePlayer1);
 			gameplayerrepository.save(gamePlayer2);
 
-            GamePlayer gamePlayerA = new GamePlayer( game2, player1);
-            GamePlayer gamePlayerB = new GamePlayer( game2, player2);
-            gameplayerrepository.save(gamePlayerA);
-            gameplayerrepository.save(gamePlayerB);
+            GamePlayer gamePlayer3 = new GamePlayer( game2, player3);
+            GamePlayer gamePlayer4 = new GamePlayer( game2, player4);
+            gameplayerrepository.save(gamePlayer3);
+            gameplayerrepository.save(gamePlayer4);
 
 			List<String> loc1 = Arrays.asList("D3", "E3", "F3");
 			List<String> loc2 = Arrays.asList("B5","B6","B7","B8","B9");
@@ -81,20 +81,24 @@ public class SalvoApplication {
 
             Score score1 = new Score(player1, game1,0.5);
             Score score2 = new Score(player1, game2,0);
-            Score score3 = new Score(player1, game3,1);
-            Score score4 = new Score(player1, game4,0.5);
-            Score score5 = new Score(player2, game2,1);
+            Score score3 = new Score(player2, game3,1);
+            Score score4 = new Score(player2, game4,0.5);
+            Score score5 = new Score(player3, game2,1);
             Score score6 = new Score(player3, game3,1);
-            Score score7 = new Score(player4, game1,0);
+            Score score7 = new Score(player4, game1,0.5);
+            Score score8 = new Score(player4, game1,1);
 
             gamePlayer1.addScore(score1);
             scorerepository.save(score1);
             gamePlayer1.addScore(score2);
             scorerepository.save(score2);
-            gamePlayer1.addScore(score3);
+            gamePlayer2.addScore(score3);
             scorerepository.save(score3);
-            gamePlayer1.addScore(score4);
+            gamePlayer2.addScore(score4);
             scorerepository.save(score4);
+            gamePlayer3.addScore(score5);
+            scorerepository.save(score5);
+
 
 			Ship ship1 = new Ship("destroyer", loc1);
 			gamePlayer1.addShip(ship1);

@@ -8,16 +8,17 @@
 <body>
 <h1>Salvo!</h1>
 
-<table id="table" border="1">
+<table class="table table-hover">
+    <thead class="thead-dark">
     <tr>
-      <th>Player</th>
-        <th>Wins</th>
-        <th>Ties</th>
-        <th>Losses</th>
-        <th>Total Score</th>
+        <th scope="col">Player</th>
+        <th scope="col">Wins</th>
+        <th scope="col">Ties</th>
+        <th scope="col">Losses</th>
+        <th scope="col">Total Score</th>
     </tr>
-    <tr>
-    </tr>
+    </thead>
+<tbody id="myTbody"></tbody>
 </table>
 
 <script src="games.js"></script>
