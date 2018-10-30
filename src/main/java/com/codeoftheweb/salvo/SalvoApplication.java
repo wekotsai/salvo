@@ -172,6 +172,15 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/**").hasAuthority("USER")
+                .anyRequest().denyAll();
 
+        http.formLogin()
+                .usernameParameter("email")
+                .passwordParameter("pwd")
+                .loginPage("/api/login.html");
+
+        http.logout().logoutUrl("/api/logout");
     }
 }
