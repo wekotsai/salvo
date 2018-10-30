@@ -135,6 +135,4 @@ public class SalvoController {
         }
         return hitTheOpp;
     }
-
-
 }

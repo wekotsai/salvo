@@ -51,12 +51,19 @@ public class Player {
         this.scores = scores;
     }
 
-    public Player(String email) {
+    public Player(String email, String password) {
         this.email = email;
+        this.password = password;
     }
+
+
 
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {
@@ -67,10 +74,6 @@ public class Player {
         this.id = id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void addPlayer(GamePlayer gamePlayer) {
         gamePlayer.setPlayer(this);
         Player.add(gamePlayer);
@@ -78,6 +81,7 @@ public class Player {
 
     private static void add(GamePlayer gamePlayer) {
     }
+
     public String getPassword() {
         return password;
     }

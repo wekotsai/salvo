@@ -31,7 +31,7 @@ function getGP(myGP) {
         template += `
         <p> Username: ${gp.player.email} </p>
         <!-- if gp.player.id = url id, ?(display) "Player" :(else) "Viewer" -->
-        <p> ${gp.player.id.toString() === id ? "(Player)" : "(Viewer)"} </p>
+        <p> ${gp.player.player_id.toString() === id ? "(Player)" : "(Viewer)"} </p>
        `;
     });
    var email = document.getElementById('email');
