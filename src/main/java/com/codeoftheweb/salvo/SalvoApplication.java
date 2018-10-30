@@ -162,4 +162,3 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
         });
     }
 }
-}
