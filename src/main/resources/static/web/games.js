@@ -4,10 +4,8 @@ function getData() {
      fetch('../api/games')
          .then(response => response.json())
          .then(json => {
-             console.log("Isa: " + json);
-
+             console.log(json);
              let playerList = getPlayerList(json);
-             console.log("Ronn: " + playerList);
              displayScore(playerList);
  })
  }
@@ -15,7 +13,6 @@ function getData() {
 function getPlayerList(json) {
     var playerList = [];
     json.forEach(player => {
-        console.log("Mike: " + JSON.stringify(player.player))
         let player_score = {};
         let wins = 0;
         let losses = 0;
@@ -37,7 +34,8 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-        console.log("TOTAL: " + JSON.stringify(playerList));
+       // console.log(playerList);
+        // console.log(JSON.stringify(playerList));
     });
     return playerList;
 }

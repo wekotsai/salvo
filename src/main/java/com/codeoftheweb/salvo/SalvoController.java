@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -50,7 +49,15 @@ public class SalvoController {
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
         Map<String, Object> gamemap = new LinkedHashMap<>();
         gamemap.put("player", playerMap(gamePlayer.getPlayer()));
+        gamemap.put("games", getGameListMap(gamePlayer.getPlayer()));
         return gamemap;
+    }
+
+    private List<Long> getGameListMap(Player player){
+        return player.getGamePlayer()
+                .stream()
+                .map(gp -> gp.getGame().getId())
+                .collect(toList());
     }
 
     private Map<String, Object> gamePMap(GamePlayer gameplayer) {
