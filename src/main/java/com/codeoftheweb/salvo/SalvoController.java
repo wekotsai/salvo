@@ -1,9 +1,9 @@
 package com.codeoftheweb.salvo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -22,8 +22,26 @@ public class SalvoController {
     @Autowired
     private SalvoRepository salvoRepository;
 
+    private Player getCurrentUser() {
+        Authentication authentication = SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        System.out.println("Ronnie: " + authentication.getName());
+        return playerRepository
+                .findByEmail(
+                        authentication
+                                .getName()
+                );
+    }
+
+    private boolean isGuest(Authentication authentication) {
+        return authentication == null || authentication instanceof AnonymousAuthenticationToken;
+    }
+
     @GetMapping("/games")
     public List<Object> getGames(){
+        getCurrentUser();
         return gameplayerrepo
                 .findAll()
                 .stream()
