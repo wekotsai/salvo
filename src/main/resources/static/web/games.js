@@ -20,10 +20,11 @@ function login() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             method: "POST",
-            body: 'userName=j.bauer@ctu.gov&password=24'
+            body: "userName=j.bauer@ctu.gov&password=24"
         })
         .then(function(res){ console.log(res) })
         .catch(function(res){ console.log(res) })
+        // location.reload();
 
 }
 
