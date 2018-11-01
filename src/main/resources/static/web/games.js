@@ -10,9 +10,33 @@ function getData() {
  })
  }
 
+function login() {
+    const ttt = { userName: "j.bauer@ctu.gov", password: "24" };
+    fetch("/api/login",
+        {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            method: "POST",
+            body: 'userName=j.bauer@ctu.gov&password=24'
+        })
+        .then(function(res){ console.log(res) })
+        .catch(function(res){ console.log(res) })
+
+}
+
+function logout() {
+    $.post("/api/logout").done(function() { console.log("logged out");
+    location.reload();
+    })
+}
+
 function getPlayerList(json) {
+    console.log("Ronn: " + JSON.stringify(json))
     var playerList = [];
-    json.forEach(player => {
+    json.games.forEach(player => {
         let player_score = {};
         let wins = 0;
         let losses = 0;
@@ -34,7 +58,7 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-       // console.log(playerList);
+        // console.log(playerList);
         // console.log(JSON.stringify(playerList));
     });
     return playerList;

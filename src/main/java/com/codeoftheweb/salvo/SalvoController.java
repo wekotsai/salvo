@@ -40,6 +40,7 @@ public class SalvoController {
         Map<String, Object> newGames = new LinkedHashMap<>();
         if (authentication == null){
             newGames.put("Current", null);
+            newGames.put("games", new ArrayList<>());
         } else {
             newGames.put("current", getCurrentUser(authentication));
             newGames.put("games", gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList()));
