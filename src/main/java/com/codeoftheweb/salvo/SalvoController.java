@@ -22,12 +22,8 @@ public class SalvoController {
     @Autowired
     private SalvoRepository salvoRepository;
 
-    private Player getCurrentUser() {
-        Authentication authentication = SecurityContextHolder
-                .getContext()
-                .getAuthentication();
-
-        System.out.println("Ronnie: " + authentication.getName());
+    private Player getCurrentUser(Authentication authentication) {
+        System.out.println("Current: " + authentication.getName());
         return playerRepository
                 .findByEmail(
                         authentication
@@ -39,15 +35,18 @@ public class SalvoController {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
 
-    @GetMapping("/games")
-    public List<Object> getGames(){
-        getCurrentUser();
-        return gameplayerrepo
-                .findAll()
-                .stream()
-                .map(game -> gameMap(game))
-                .collect(toList());
+    @RequestMapping("/games")
+    public Map<String,Object> getGames(Authentication authentication){
+        Map<String, Object> newGames = new LinkedHashMap<>();
+        if (authentication == null){
+            newGames.put("Current", null);
+        } else {
+            newGames.put("current", getCurrentUser(authentication));
+            newGames.put("games", gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList()));
+        }
+        return newGames;
     }
+
 
     @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
@@ -63,6 +62,7 @@ public class SalvoController {
     public Map<String, Object> getGameView(@PathVariable Long nn) {
         return gamePMap(gameplayerrepo.findById(nn).get());
     }
+
 
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
         Map<String, Object> gamemap = new LinkedHashMap<>();
