@@ -48,11 +48,15 @@ public class SalvoController {
     @RequestMapping("/players")
     public ResponseEntity<Map<String, Object>> getNewPlayer(@RequestParam String email, String password){
         if (playerRepository.findByEmail(email) == null){
-
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }else {
+            Player player = new Player(email, password);
+            playerRepository.save(player);
+            Map<String, Object> responseMap = new LinkedHashMap<String, Object>(){{
+                put("New Player", player.getEmail());
+            }};
+            return ResponseEntity.status(HttpStatus.CREATED).body(responseMap);
+        }else{
             Map<String, Object> newPlayer = new LinkedHashMap<String, Object>(){{
-                put("error", ": Name in use");
+                put("error", "Name in use");
             }};
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(newPlayer);
         }
