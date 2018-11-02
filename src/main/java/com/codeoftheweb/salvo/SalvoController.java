@@ -1,8 +1,9 @@
 package com.codeoftheweb.salvo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -24,11 +25,7 @@ public class SalvoController {
 
     private Player getCurrentUser(Authentication authentication) {
         System.out.println("Current: " + authentication.getName());
-        return playerRepository
-                .findByEmail(
-                        authentication
-                                .getName()
-                );
+        return playerRepository.findByEmail(authentication.getName());
     }
 
     private boolean isGuest(Authentication authentication) {
@@ -48,6 +45,18 @@ public class SalvoController {
         return newGames;
     }
 
+    @RequestMapping("/players")
+    public ResponseEntity<Map<String, Object>> getNewPlayer(@RequestParam String email, String password){
+        if (playerRepository.findByEmail(email) == null){
+
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }else {
+            Map<String, Object> newPlayer = new LinkedHashMap<String, Object>(){{
+                put("error", ": Name in use");
+            }};
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(newPlayer);
+        }
+    }
 
     @GetMapping("/gameplayers")
     public List<GamePlayer> getAll() {
@@ -63,7 +72,6 @@ public class SalvoController {
     public Map<String, Object> getGameView(@PathVariable Long nn) {
         return gamePMap(gameplayerrepo.findById(nn).get());
     }
-
 
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
         Map<String, Object> gamemap = new LinkedHashMap<>();
