@@ -11,7 +11,7 @@ function getData() {
  }
 
 function login() {
-    const ttt = { userName: "j.bauer@ctu.gov", password: "24" };
+    let credentials = { userName: "j.bauer@ctu.gov", password: "24" };
     fetch("/api/login",
         {
             credentials: 'include',
@@ -22,20 +22,40 @@ function login() {
             method: "POST",
             body: "userName=j.bauer@ctu.gov&password=24"
         })
-        .then(function(res){ console.log(res) })
-        .catch(function(res){ console.log(res) })
-        // location.reload();
+        .then(function(res){
+            console.log(res);
+            location.reload();
+        })
+        .catch(function(res){ console.log(res) });
 
 }
 
-function logout() {
+    // function logout() {
+    //     fetch("/api/logout",{
+    //         .then(function (res) {
+    //             console.log(res);
+    //             location.reload();
+    //         })
+    //         .catch(function(res){ console.log(res) });
+    //     })
+    //     }
+
+    function logout() {
     $.post("/api/logout").done(function() { console.log("logged out");
     location.reload();
     })
+
 }
 
+function signup() {
+    $.post("/api/signup").done(function () {
+        console.log("signup");
+    })
+}
+
+
 function getPlayerList(json) {
-    console.log("Ronn: " + JSON.stringify(json))
+    console.log(JSON.stringify(json))
     var playerList = [];
     json.games.forEach(player => {
         let player_score = {};
