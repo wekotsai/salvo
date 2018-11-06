@@ -7,35 +7,26 @@
     <title>Salvo!</title>
 </head>
 <body>
-<!--<h1>Salvo!</h1>-->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
-                    <div class="form-signin">
-                        <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email" value="" required autofocus>
-                            <label for="inputEmail">Email</label>
+<div id="signIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+                        <div class="form-signin">
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                                <label for="inputEmail">Email</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" value="" required>
+                                <label for="inputPassword">Password</label>
+                            </div>
+                            <button id="login" class="btn btn-lg btn-primary btn-block text-uppercase" onclick="login()">Log in</button>
+                            <hr class="my-4">
+                            <button id="signup" class="btn btn-lg btn-info btn-block text-uppercase" onclick="register()">Register</button>
                         </div>
-
-                        <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" value="" required>
-                            <label for="inputPassword">Password</label>
-                        </div>
-
-                       <!-- <div id="registerForm">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email" value="" required autofocus>
-                            <label for="inputEmail">Email</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" value="" required>
-                            <label for="inputPassword">Password</label>
-                        </div> -->
-
-                        <button id="login" class="btn btn-lg btn-primary btn-block text-uppercase" data-toggle="collapse" data-target="#login" onclick="login()">Log in</button>
-                        <button id="logout" class="btn btn-lg btn-primary btn-block text-uppercase" onclick="logout()">Log out</button>
-                        <hr class="my-4">
-                        <button id="signup" class="btn btn-lg btn-info btn-block text-uppercase" onclick="signup()">Sign up</button>
                     </div>
                 </div>
             </div>
@@ -43,19 +34,61 @@
     </div>
 </div>
 
-<div id="myDIV" class="collapse">
+<div id="regForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Register</h5>
+                        <div class="form-signin">
+                            <div class="form-label-group">
+                                <input type="email" id="regName" class="form-control" placeholder="name" required autofocus>
+                                <label for="regName">Name</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" id="regEmail" class="form-control" placeholder="Email" required autofocus>
+                                <label for="regEmail">Email</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="regPassword" class="form-control" placeholder="Password" value="" required>
+                                <label for="regPassword">Password</label>
+                            </div>
+                            <button id="signup" class="btn btn-lg btn-info btn-block text-uppercase" onclick="signup()">Sign up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="leaderboard">
 <table class="table table-hover">
     <thead class="table-primary">
-    <tr>
-        <th scope="col">Player</th>
-        <th scope="col">Wins</th>
-        <th scope="col">Ties</th>
-        <th scope="col">Losses</th>
-        <th scope="col">Total Score</th>
-    </tr>
+        <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Wins</th>
+            <th scope="col">Ties</th>
+            <th scope="col">Losses</th>
+            <th scope="col">Total Score</th>
+        </tr>
     </thead>
 <tbody id="myTbody"  class="table-light"></tbody>
 </table>
+    <div class="container">
+        <div class="row">
+            <!--<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">-->
+                <!--<div class="card card-signin my-5">-->
+                    <!--<div class="card-body">-->
+                        <div class="form-signin">
+                            <button id="logout" class="btn btn-lg btn-primary btn-block text-uppercase" onclick="logout()">Log out</button>
+                        </div>
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
 </div>
 
 <script src="games.js"></script>

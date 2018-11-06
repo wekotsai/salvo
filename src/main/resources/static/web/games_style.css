@@ -107,3 +107,6 @@ body {
     color: #777;
 }
 
+#regForm, #leaderboard {
+    display: none;
+}

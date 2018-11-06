@@ -6,12 +6,17 @@ function getData() {
          .then(json => {
              console.log(json);
              let playerList = getPlayerList(json);
+             loggedInUser(json);
              displayScore(playerList);
  })
  }
 
 function login() {
-    let credentials = { userName: "j.bauer@ctu.gov", password: "24" };
+    const email = document.querySelector("#inputEmail").value;
+    console.log(email);
+    const pw = document.querySelector("#inputPassword").value;
+    console.log(pw);
+
     fetch("/api/login",
         {
             credentials: 'include',
@@ -20,42 +25,61 @@ function login() {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             method: "POST",
-            body: "userName=j.bauer@ctu.gov&password=24"
+            body: "userName=" + email + "&password=" + pw
         })
         .then(function(res){
             console.log(res);
+            // document.getElementById("leaderboard").style.display = "block";
             location.reload();
         })
         .catch(function(res){ console.log(res) });
 
 }
 
-    // function logout() {
-    //     fetch("/api/logout",{
-    //         .then(function (res) {
-    //             console.log(res);
-    //             location.reload();
-    //         })
-    //         .catch(function(res){ console.log(res) });
-    //     })
-    //     }
+function loggedInUser(playerList) {
+    if ( playerList.Current !== null) {
+        document.getElementById("leaderboard").style.display = "block";
+        document.getElementById("signIn").style.display = "none";
+    }
+}
 
-    function logout() {
-    $.post("/api/logout").done(function() { console.log("logged out");
-    location.reload();
-    })
-
+function register() {
+    document.getElementById("regForm").style.display = "block";
 }
 
 function signup() {
-    $.post("/api/signup").done(function () {
-        console.log("signup");
-    })
+    const name = document.querySelector("#regName").value;
+    const regEmail = document.querySelector("#regEmail").value;
+    const regPw = document.querySelector("#regPassword").value;
+
+    fetch("/api/signup",
+        {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            method: "POST",
+            body: "name" + name + "&userName=" + regEmail + "&password=" + regPw
+        })
+        .then(function(res){
+            console.log(res);
+           // location.reload();
+        })
+        .catch(function(res){ console.log(res) });
 }
+
+    function logout() {
+        fetch("/api/logout",{
+        }).then(function (res) {
+            location.reload();
+        })
+            .catch(function(res){ console.log(res) });
+        }
 
 
 function getPlayerList(json) {
-    console.log(JSON.stringify(json))
+    console.log(JSON.stringify(json));
     var playerList = [];
     json.games.forEach(player => {
         let player_score = {};
