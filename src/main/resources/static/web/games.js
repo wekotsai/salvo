@@ -1,15 +1,17 @@
-getData();
+// getData();
 
-function getData() {
+// function getData() {
      fetch('../api/games')
          .then(response => response.json())
          .then(json => {
              console.log(json);
              let playerList = getPlayerList(json);
+             changeUrl(json);
              loggedInUser(json);
              displayScore(playerList);
+
  })
- }
+ // }
 
 function login() {
     const email = document.querySelector("#inputEmail").value;
@@ -29,7 +31,6 @@ function login() {
         })
         .then(function(res){
             console.log(res);
-            // document.getElementById("leaderboard").style.display = "block";
             location.reload();
         })
         .catch(function(res){ console.log(res) });
@@ -42,6 +43,27 @@ function loggedInUser(playerList) {
         document.getElementById("signIn").style.display = "none";
     }
 }
+
+function changeUrl(json) {
+    var url = new URL('http://localhost:8080/web/games.html?gp=');
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+
+    var gpId= json.games[0].player.player_id;
+    console.log("yo " + url + gpId);
+    // for (i = 0; i < gdId.length; i++) {
+    //     x += gpId.games[i];
+    // }
+    if  ( gpId == 1) {
+        search_params.append('id', '1');
+    } else if (gpId == 2) {
+        search_params.append('id', '2');
+    }
+        url.search = search_params.toString();
+        var new_url = url.toString();
+        console.log("new" + new_url);
+}
+
 
 function register() {
     document.getElementById("regForm").style.display = "block";
@@ -64,7 +86,6 @@ function signup() {
         })
         .then(function(res){
             console.log(res);
-           // location.reload();
         })
         .catch(function(res){ console.log(res) });
 }
@@ -103,8 +124,6 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-        // console.log(playerList);
-        // console.log(JSON.stringify(playerList));
     });
     return playerList;
 }
