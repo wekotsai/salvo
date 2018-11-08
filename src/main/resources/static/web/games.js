@@ -48,20 +48,17 @@ function changeUrl(json) {
     var url = new URL('http://localhost:8080/web/games.html?gp=');
     var query_string = url.search;
     var search_params = new URLSearchParams(query_string);
-
     var gpId= json.games[0].player.player_id;
     console.log("yo " + url + gpId);
-    // for (i = 0; i < gdId.length; i++) {
-    //     x += gpId.games[i];
-    // }
-    if  ( gpId == 1) {
+
+    if  (gpId == 1) {
         search_params.append('id', '1');
     } else if (gpId == 2) {
         search_params.append('id', '2');
     }
         url.search = search_params.toString();
         var new_url = url.toString();
-        console.log("new" + new_url);
+        console.log("new " + new_url);
 }
 
 
