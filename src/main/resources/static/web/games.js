@@ -45,20 +45,20 @@ function loggedInUser(playerList) {
 }
 
 function changeUrl(json) {
+   // debugger;
     var url = new URL('http://localhost:8080/web/games.html?gp=');
     var query_string = url.search;
     var search_params = new URLSearchParams(query_string);
-    var gpId= json.games[0].player.player_id;
-    console.log("yo " + url + gpId);
 
-    if  (gpId == 1) {
-        search_params.append('id', '1');
-    } else if (gpId == 2) {
-        search_params.append('id', '2');
-    }
+        search_params.append('id', json.current.id);
+
         url.search = search_params.toString();
         var new_url = url.toString();
-        console.log("new " + new_url);
+        console.log("new1 " + new_url);
+        if (location.href !== new_url)
+        {
+        location.href= new_url;
+        }
 }
 
 
@@ -100,6 +100,8 @@ function getPlayerList(json) {
     console.log(JSON.stringify(json));
     var playerList = [];
     json.games.forEach(player => {
+        if (json.current.id == player.player.player_id) {
+
         let player_score = {};
         let wins = 0;
         let losses = 0;
@@ -121,6 +123,7 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
+    }
     });
     return playerList;
 }
