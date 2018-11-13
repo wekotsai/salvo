@@ -13,6 +13,8 @@
  })
  // }
 
+var errorStatus = false;
+
 function login() {
     const email = document.querySelector("#inputEmail").value;
     console.log(email);
@@ -67,24 +69,29 @@ function register() {
 }
 
 function signup() {
-    const name = document.querySelector("#regName").value;
-    const regEmail = document.querySelector("#regEmail").value;
+
+    var errorMessage = [];
+    const regEmail = document.querySelector("#regEmail").value.toLowerCase();
     const regPw = document.querySelector("#regPassword").value;
 
-    fetch("/api/signup",
-        {
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            method: "POST",
-            body: "name" + name + "&userName=" + regEmail + "&password=" + regPw
-        })
-        .then(function(res){
-            console.log(res);
-        })
-        .catch(function(res){ console.log(res) });
+   $.post("/api/players", {email: email, password: password})
+   .done(res => login())
+   .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
+    // fetch("/api/signup",
+
+    //     {
+    //         credentials: 'include',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         },
+    //         method: "POST",
+    //         body: "name" + name + "&userName=" + regEmail + "&password=" + regPw
+    //     })
+    //     .then(function(res){
+    //         console.log(res);
+    //     })
+    //     .catch(function(res){ console.log(res) });
 }
 
     function logout() {
@@ -144,4 +151,3 @@ playerList.forEach(pl => {
              table.innerHTML = templateTest;
          })
 }
-
