@@ -48,11 +48,11 @@ function loggedInUser(playerList) {
 
 function changeUrl(json) {
    // debugger;
-    var url = new URL('http://localhost:8080/web/games.html?gp=');
+    var url = new URL('http://localhost:8080/web/games.html?');
     var query_string = url.search;
     var search_params = new URLSearchParams(query_string);
 
-        search_params.append('id', json.current.id);
+        search_params.append('gp', json.current.id);
 
         url.search = search_params.toString();
         var new_url = url.toString();
@@ -77,8 +77,8 @@ function signup() {
    $.post("/api/players", {email: email, password: password})
    .done(res => login())
    .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
-    // fetch("/api/signup",
 
+    // fetch("/api/signup",
     //     {
     //         credentials: 'include',
     //         headers: {

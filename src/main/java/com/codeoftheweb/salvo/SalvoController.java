@@ -72,8 +72,21 @@ public class SalvoController {
         return salvoRepository.findAll().stream().map(salvo -> salvoMap(salvo)).collect(toList());
     }
 
+//    @GetMapping("/game_view/{nn}")
+//    public Map<String, Object> getGameView(@PathVariable Long nn) {
+//        return gamePMap(gameplayerrepo.findById(nn).get());
+//    }
+
     @GetMapping("/game_view/{nn}")
-    public Map<String, Object> getGameView(@PathVariable Long nn) {
+    public Map<String, Object> getGameView(@PathVariable Long nn, Authentication authentication) {
+        Map<String, Object> newId = new LinkedHashMap<>();
+        if (authentication == null){
+            newId.put("Current", null);
+            newId.put("games", new ArrayList<>());
+        } else {
+            newId.put("current", getCurrentUser(authentication));
+            newId.put("games", gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList()));
+        }
         return gamePMap(gameplayerrepo.findById(nn).get());
     }
 
