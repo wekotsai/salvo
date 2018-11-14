@@ -107,7 +107,7 @@ function getPlayerList(json) {
     console.log(JSON.stringify(json));
     var playerList = [];
     json.games.forEach(player => {
-        if (json.current.id == player.player.player_id) {
+//        if (json.current.id == player.player.player_id) {
 
         let player_score = {};
         let wins = 0;
@@ -130,7 +130,7 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-    }
+//    }
     });
     return playerList;
 }

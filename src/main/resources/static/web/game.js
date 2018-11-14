@@ -11,7 +11,7 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
-
+        if (json.current.id == player.player.player_id) {
         myShips = myJson.ships;
         myGP = myJson.gamePlayer;
         hitTheOpp = myJson.hitTheOpp;
@@ -22,6 +22,7 @@ fetch(`../api/game_view/${id}`)
         name(myShips, myOpponentsSalvoes, "ship", "myTable");
         name1(mySalvoes, hitTheOpp, "salvo", "salvoTable");
         getGP(myGP);
+        }
     });
 
 function getGP(myGP) {
