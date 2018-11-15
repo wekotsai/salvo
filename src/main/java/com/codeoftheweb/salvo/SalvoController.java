@@ -81,13 +81,10 @@ public class SalvoController {
     public Map<String, Object> getGameView(@PathVariable Long nn, Authentication authentication) {
         Map<String, Object> newId = new LinkedHashMap<>();
         if (authentication == null){
-            newId.put("Current", null);
-            newId.put("games", new ArrayList<>());
+            return (Map<String, Object>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(newId);
         } else {
-            newId.put("current", getCurrentUser(authentication));
-            newId.put("games", gameplayerrepo.findAll().stream().map(game -> gameMap(game)).collect(toList()));
+            return gamePMap(gameplayerrepo.findById(nn).get());
         }
-        return gamePMap(gameplayerrepo.findById(nn).get());
     }
 
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
