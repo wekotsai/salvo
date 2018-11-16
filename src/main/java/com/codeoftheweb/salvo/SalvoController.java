@@ -1,6 +1,7 @@
 package com.codeoftheweb.salvo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -78,13 +79,20 @@ public class SalvoController {
 //    }
 
     @GetMapping("/game_view/{nn}")
-    public Map<String, Object> getGameView(@PathVariable Long nn, Authentication authentication) {
+    public ResponseEntity<Map<String, Object>> getGameView(@PathVariable long nn, Authentication authentication) {
         Map<String, Object> newId = new LinkedHashMap<>();
-        if (authentication == null){
-            return (Map<String, Object>) ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(newId);
+        GamePlayer gamePlayer = gameplayerrepo.findById(nn);
+        if (gamePlayer.getPlayer() != getCurrentUser(authentication)){
+            return new ResponseEntity<>(Map("Error", "other player's game"), HttpStatus.UNAUTHORIZED);
         } else {
-            return gamePMap(gameplayerrepo.findById(nn).get());
+            return new ResponseEntity<>(gamePMap(gamePlayer), HttpStatus.OK);
         }
+    }
+
+    public Map<String, Object> Map(String key, String value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
     }
 
     private Map<String, Object> gameMap(GamePlayer gamePlayer){
