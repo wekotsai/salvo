@@ -12,7 +12,9 @@ fetch(`../api/game_view/${id}`)
     })
     .then(function (myJson) {
     console.log("jiiiiii" + JSON.stringify(myJson))
-        if (myJson.gp_id == myJson.gamePlayer[0].gp_id) {
+    var gp1 = myJson.gamePlayer[0].gp_id;
+    var gp2 = myJson.gamePlayer[1].gp_id;
+        if (myJson.gp_id == gp1 || myJson.gp_id == gp2) {
         myShips = myJson.ships;
         myGP = myJson.gamePlayer;
         hitTheOpp = myJson.hitTheOpp;
