@@ -47,7 +47,6 @@ function loggedInUser(playerList) {
 }
 
 function changeUrl(json) {
-   // debugger;
     var url = new URL('http://localhost:8080/web/games.html?');
     var query_string = url.search;
     var search_params = new URLSearchParams(query_string);
@@ -107,7 +106,6 @@ function getPlayerList(json) {
     console.log(JSON.stringify(json));
     var playerList = [];
     json.games.forEach(player => {
-//        if (json.current.id == player.player.player_id) {
 
         let player_score = {};
         let wins = 0;
@@ -130,8 +128,9 @@ function getPlayerList(json) {
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-//    }
+
     });
+
     return playerList;
 }
 

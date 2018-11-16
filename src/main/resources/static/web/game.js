@@ -11,7 +11,8 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
-        if (json.current.id == player.player.player_id) {
+    console.log("jiiiiii" + JSON.stringify(myJson))
+        if (myJson.gp_id == myJson.gamePlayer[0].gp_id) {
         myShips = myJson.ships;
         myGP = myJson.gamePlayer;
         hitTheOpp = myJson.hitTheOpp;
