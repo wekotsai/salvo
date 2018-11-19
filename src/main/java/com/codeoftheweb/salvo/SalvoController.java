@@ -33,6 +33,20 @@ public class SalvoController {
         return authentication == null || authentication instanceof AnonymousAuthenticationToken;
     }
 
+    @RequestMapping(value = "/games", method = RequestMethod.POST)
+    public ResponseEntity<Map<String,Object>> createGame(Authentication authentication) {
+        Map<String, Object> createAGame = new LinkedHashMap<>();
+        if (authentication == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(createAGame);
+        } else {
+            Game game = new Game();
+            gameRepository.save(game);
+            GamePlayer gamePlayer = new GamePlayer(game, getCurrentUser(authentication));
+            gameplayerrepo.save(gamePlayer);
+            return new ResponseEntity<>(Map("gpid", String.valueOf(gamePlayer.getId())), HttpStatus.CREATED);
+        }
+    }
+
     @RequestMapping("/games")
     public Map<String,Object> getGames(Authentication authentication){
         Map<String, Object> newGames = new LinkedHashMap<>();
