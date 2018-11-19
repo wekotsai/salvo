@@ -55,7 +55,7 @@ public class Game {
         this.date = date;
     }
 
-    public Set<GamePlayer> getGamePlayer() {
+    public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
 

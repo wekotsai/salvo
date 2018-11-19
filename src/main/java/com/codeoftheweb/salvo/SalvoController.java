@@ -103,6 +103,29 @@ public class SalvoController {
         }
     }
 
+    @RequestMapping("/api/game/{nn}/players")
+    public ResponseEntity<Map<String, Object>> joinAGame(@PathVariable long nn, Authentication authentication) {
+        Map<String, Object> joinGame = new LinkedHashMap<>();
+        Player currentUser = getCurrentUser(authentication);
+
+        if (currentUser == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(joinGame);
+        } else {
+            Game game = gameRepository.findById(nn);
+            if (game == null) {
+                return new ResponseEntity<>(Map("Error", "No such game"), HttpStatus.FORBIDDEN);
+            } else {
+                if (game.getGamePlayers().size() > 2){
+                    return new ResponseEntity<>(Map("Error", "Game is full"), HttpStatus.FORBIDDEN);
+                } else {
+                    GamePlayer gamePlayer = new GamePlayer(game, currentUser);
+                    gameplayerrepo.save(gamePlayer);
+                    return new ResponseEntity<>(Map("gpid", String.valueOf(gamePlayer.getId())), HttpStatus.CREATED);
+                }
+            }
+        }
+    }
+
     public Map<String, Object> Map(String key, String value) {
         Map<String, Object> map = new HashMap<>();
         map.put(key, value);

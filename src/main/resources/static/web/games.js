@@ -6,6 +6,7 @@
          .then(json => {
              console.log(json);
              let playerList = getPlayerList(json);
+             let gameList = getGamesList(json);
              changeUrl(json);
              loggedInUser(json);
              displayScore(playerList);
@@ -75,8 +76,19 @@ function createGame() {
         id = res.gpid
         location.replace(`http://localhost:8080/web/game.html?gp=${id}`)
     })
-    .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
-}
+    .fail(err => {errorMessage = err, console.log(errorMessage), alert("ERROR"), errorStatus = true})
+ }
+
+
+function joinGame() {
+  $.post("/api/game/${id}/players", {})
+    .done(res => {
+        console.log(res),
+        location.replace(`http://localhost:8080/web/game.html?gp=${id}`)
+    })
+    .fail(err => {errorMessage = err, console.log(errorMessage), alert("ERROR"), errorStatus = true})
+ }
+
 
 function signup() {
 
@@ -112,7 +124,6 @@ function signup() {
             .catch(function(res){ console.log(res) });
         }
 
-
 function getPlayerList(json) {
     console.log(JSON.stringify(json));
     var playerList = [];
@@ -147,7 +158,7 @@ function getPlayerList(json) {
 
 function displayScore(playerList) {
    var templateTest = '';
-playerList.forEach(pl => {
+    playerList.forEach(pl => {
              templateTest += `
              <tr>
              <td>${pl.email}</td>
@@ -161,3 +172,23 @@ playerList.forEach(pl => {
              table.innerHTML = templateTest;
          })
 }
+
+function getGamesList(json) {
+   console.log("game" + JSON.stringify(json))
+   var gameList = [];
+   var templateTest = '';
+    json.games.forEach(gm => {
+             templateTest += `
+             <tr>
+             <td>${gm.games}</td>
+             <td>${gm.email}</td>
+             <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame()">Join Game</button></td>
+             </tr>
+             `;
+             var table = document.getElementById('gameTbody');
+             table.innerHTML = templateTest;
+         })
+
+        return gameList
+}
+
