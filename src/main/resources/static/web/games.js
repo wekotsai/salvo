@@ -67,6 +67,17 @@ function register() {
     document.getElementById("regForm").style.display = "block";
 }
 
+function createGame() {
+    let id;
+    $.post("/api/games", {})
+    .done(res => {
+        console.log(res),
+        id = res.gpid
+        location.replace(`http://localhost:8080/web/game.html?gp=${id}`)
+    })
+    .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
+}
+
 function signup() {
 
     var errorMessage = [];
