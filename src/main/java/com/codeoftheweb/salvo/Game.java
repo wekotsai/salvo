@@ -2,10 +2,7 @@ package com.codeoftheweb.salvo;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Game {
@@ -37,7 +34,9 @@ public class Game {
         return null;
     }
 
-
+    public Game(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;

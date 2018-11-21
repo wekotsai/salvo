@@ -108,7 +108,7 @@ public class GamePlayer {
         this.id = id;
     }
 
-    public Game getGames() {
+    public Game getGame() {
         return this.game;
     }
 
@@ -120,10 +120,6 @@ public class GamePlayer {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public Game getGame() {
-        return game;
     }
 
     public void addScore(Score score1) {

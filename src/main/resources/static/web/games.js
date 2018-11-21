@@ -1,18 +1,29 @@
-// getData();
 
-// function getData() {
      fetch('../api/games')
          .then(response => response.json())
          .then(json => {
-             console.log(json);
-             let playerList = getPlayerList(json);
-             let gameList = getGamesList(json);
-             changeUrl(json);
-             loggedInUser(json);
-             displayScore(playerList);
+            var gamesData = json
+             console.log(gamesData);
+             let gameList = getGamesList(gamesData);
+             changeUrl(gamesData);
+             loggedInUser(gamesData);
+
 
  })
- // }
+
+    fetch('../api/leaderboard')
+          .then(res => res.json())
+          .then(json => {
+          var playersData = json
+                console.log(playersData);
+                 let playerList = getPlayerList(playersData);
+                 displayScore(playerList);
+
+
+
+  })
+
+
 
 var errorStatus = false;
 
@@ -99,21 +110,6 @@ function signup() {
    $.post("/api/players", {email: email, password: password})
    .done(res => login())
    .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
-
-    // fetch("/api/signup",
-    //     {
-    //         credentials: 'include',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/x-www-form-urlencoded'
-    //         },
-    //         method: "POST",
-    //         body: "name" + name + "&userName=" + regEmail + "&password=" + regPw
-    //     })
-    //     .then(function(res){
-    //         console.log(res);
-    //     })
-    //     .catch(function(res){ console.log(res) });
 }
 
     function logout() {
@@ -125,7 +121,7 @@ function signup() {
         }
 
 function getPlayerList(json) {
-    console.log(JSON.stringify(json));
+   console.log("heya" + JSON.stringify(json))
     var playerList = [];
     json.games.forEach(player => {
 
@@ -174,14 +170,15 @@ function displayScore(playerList) {
 }
 
 function getGamesList(json) {
-   console.log("game" + JSON.stringify(json))
+//   console.log("game" + JSON.stringify(json))
    var gameList = [];
    var templateTest = '';
+    console.log("yo" + JSON.stringify(json))
     json.games.forEach(gm => {
              templateTest += `
              <tr>
-             <td>${gm.games}</td>
-             <td>${gm.email}</td>
+             <td>${gm.gameid}</td>
+             <td>${gm.player.player.email} vs ${gm.player.player_id} </td>
              <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame()">Join Game</button></td>
              </tr>
              `;
