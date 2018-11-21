@@ -7,20 +7,15 @@
              let gameList = getGamesList(gamesData);
              changeUrl(gamesData);
              loggedInUser(gamesData);
-
-
  })
 
     fetch('../api/leaderboard')
           .then(res => res.json())
           .then(json => {
-          var playersData = json
-                console.log(playersData);
-                 let playerList = getPlayerList(playersData);
-                 displayScore(playerList);
-
-
-
+             var playersData = json
+              console.log(playersData);
+              let playerList = getPlayerList(playersData);
+              displayScore(playerList);
   })
 
 
@@ -123,7 +118,7 @@ function signup() {
 function getPlayerList(json) {
    console.log("heya" + JSON.stringify(json))
     var playerList = [];
-    json.games.forEach(player => {
+    playerList.forEach(player => {
 
         let player_score = {};
         let wins = 0;
@@ -173,12 +168,14 @@ function getGamesList(json) {
 //   console.log("game" + JSON.stringify(json))
    var gameList = [];
    var templateTest = '';
-    console.log("yo" + JSON.stringify(json))
+    console.log("yo: " + JSON.stringify(json.games))
     json.games.forEach(gm => {
+    console.log("rrrrrr: " + JSON.stringify(gm))
+
              templateTest += `
              <tr>
              <td>${gm.gameid}</td>
-             <td>${gm.player.player.email} vs ${gm.player.player_id} </td>
+             <td>${gm.players[0].player.email} vs ${gm.players[1].player.email} </td>
              <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame()">Join Game</button></td>
              </tr>
              `;

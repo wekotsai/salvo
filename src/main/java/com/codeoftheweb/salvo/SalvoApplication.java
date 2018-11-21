@@ -42,11 +42,19 @@ public class SalvoApplication {
 			Player player2 = new Player ( "c.obrian@ctu.gov", "42");
 			Player player3 = new Player ("kim_bauer@gmail.gov", "kb");
 			Player player4 = new Player ( "t.almeida@ctu.gov", "mole");
+            Player player5 = new Player ( "a@ctu.gov", "123");
+            Player player6 = new Player ( "b@ctu.gov", "456");
+            Player player7 = new Player ( "c@ctu.gov", "789");
+            Player player8 = new Player ( "d@ctu.gov", "000");
 
 			playerrepository.save(player1);
 			playerrepository.save(player2);
 			playerrepository.save(player3);
 			playerrepository.save(player4);
+            playerrepository.save(player5);
+            playerrepository.save(player6);
+            playerrepository.save(player7);
+            playerrepository.save(player8);
 
 			Game game1 = new Game ();
 			Game game2 = new Game ();
@@ -67,6 +75,16 @@ public class SalvoApplication {
             GamePlayer gamePlayer4 = new GamePlayer( game2, player4);
             gameplayerrepository.save(gamePlayer3);
             gameplayerrepository.save(gamePlayer4);
+
+            GamePlayer gamePlayer5 = new GamePlayer( game3, player5);
+            GamePlayer gamePlayer6 = new GamePlayer( game3, player6);
+            gameplayerrepository.save(gamePlayer5);
+            gameplayerrepository.save(gamePlayer6);
+
+            GamePlayer gamePlayer7 = new GamePlayer( game4, player7);
+            GamePlayer gamePlayer8 = new GamePlayer( game4, player8);
+            gameplayerrepository.save(gamePlayer7);
+            gameplayerrepository.save(gamePlayer8);
 
 			List<String> loc1 = Arrays.asList("D3", "E3", "F3");
 			List<String> loc2 = Arrays.asList("B5","B6","B7","B8","B9");

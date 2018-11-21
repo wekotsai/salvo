@@ -140,7 +140,7 @@ public class SalvoController {
         Map<String, Object> gamemap = new LinkedHashMap<>();
         gamemap.put("gameid", game.getId());
         gamemap.put("created", game.getDate());
-        gamemap.put("player", gameplayerSet(game.getGamePlayers()));
+        gamemap.put("players", gameplayerSet(game.getGamePlayers()));
         return gamemap;
     }
 
