@@ -111,7 +111,6 @@ public class SalvoController {
     public ResponseEntity<Map<String, Object>> joinAGame(@PathVariable long nn, Authentication authentication) {
         Map<String, Object> joinGame = new LinkedHashMap<>();
         Player currentUser = getCurrentUser(authentication);
-
         if (currentUser == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(joinGame);
         } else {

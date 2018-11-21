@@ -13,7 +13,7 @@
           .then(res => res.json())
           .then(json => {
              var playersData = json
-              console.log(playersData);
+             console.log(playersData);
               let playerList = getPlayerList(playersData);
               displayScore(playerList);
   })
@@ -86,7 +86,8 @@ function createGame() {
  }
 
 
-function joinGame() {
+function joinGame(i) {
+  id = this.gamesData.games[i].gameid;
   $.post("/api/game/${id}/players", {})
     .done(res => {
         console.log(res),
@@ -115,17 +116,16 @@ function signup() {
             .catch(function(res){ console.log(res) });
         }
 
-function getPlayerList(json) {
-   console.log("heya" + JSON.stringify(json))
+function getPlayerList(playersData) {
     var playerList = [];
-    playerList.forEach(player => {
+   playersData.forEach(player => {
 
         let player_score = {};
         let wins = 0;
         let losses = 0;
         let ties = 0;
         let total_scores = 0;
-        player.player.player_score.forEach(score => {
+        player.player_score.forEach(score => {
             if (score.game_score.scores == 1){
                 return wins++;
             } else if (score.game_score.scores == 0.5){
@@ -135,15 +135,13 @@ function getPlayerList(json) {
             }
         });
         total_scores = wins + (ties / 2);
-        player_score = {"email": player.player.email,
+        player_score = {"email": player.email,
                         "total_scores": total_scores,
                         "wins": wins,
                         "ties": ties,
                         "losses": losses};
         playerList.push(player_score);
-
     });
-
     return playerList;
 }
 
@@ -165,24 +163,19 @@ function displayScore(playerList) {
 }
 
 function getGamesList(json) {
-//   console.log("game" + JSON.stringify(json))
    var gameList = [];
    var templateTest = '';
-    console.log("yo: " + JSON.stringify(json.games))
-    json.games.forEach(gm => {
-    console.log("rrrrrr: " + JSON.stringify(gm))
-
+    json.games.forEach((gm,i) => {
              templateTest += `
              <tr>
              <td>${gm.gameid}</td>
              <td>${gm.players[0].player.email} vs ${gm.players[1].player.email} </td>
-             <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame()">Join Game</button></td>
+             <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame(${i})">Join Game</button></td>
              </tr>
              `;
              var table = document.getElementById('gameTbody');
              table.innerHTML = templateTest;
          })
-
         return gameList
 }
 
