@@ -85,9 +85,10 @@ function createGame() {
     .fail(err => {errorMessage = err, console.log(errorMessage), alert("ERROR"), errorStatus = true})
  }
 
+//document.getElementById("joinG").addEventListener("click", joinGame);
+function joinGame(id) {
+console.log("huhuh2 " + id)
 
-function joinGame(i) {
-  id = this.gamesData.games[i].gameid;
   $.post("/api/game/${id}/players", {})
     .done(res => {
         console.log(res),
@@ -165,12 +166,12 @@ function displayScore(playerList) {
 function getGamesList(json) {
    var gameList = [];
    var templateTest = '';
-    json.games.forEach((gm,i) => {
+    json.games.forEach((gm, i) => {
              templateTest += `
              <tr>
              <td>${gm.gameid}</td>
              <td>${gm.players[0].player.email} vs ${gm.players[1].player.email} </td>
-             <td><button id="joinGame" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame(${i})">Join Game</button></td>
+             <td><button id="joinG" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame(${gm.gameid})">Join Game</button></td>
              </tr>
              `;
              var table = document.getElementById('gameTbody');

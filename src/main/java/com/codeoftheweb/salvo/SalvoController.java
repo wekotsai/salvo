@@ -91,10 +91,8 @@ public class SalvoController {
         return playerRepository.findAll().stream().map(player -> playerMap(player)).collect(toList());
     }
 
-//    @GetMapping("/game_view/{nn}")
-//    public Map<String, Object> getGameView(@PathVariable Long nn) {
-//        return gamePMap(gameplayerrepo.findById(nn).get());
-//    }
+//    @RequestMapping("/games/players/{gamePlayerId}/ships")
+//    public List<Object>
 
     @GetMapping("/game_view/{nn}")
     public ResponseEntity<Map<String, Object>> getGameView(@PathVariable long nn, Authentication authentication) {
