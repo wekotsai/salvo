@@ -22,6 +22,8 @@ public class SalvoController {
     private PlayerRepository playerRepository;
     @Autowired
     private SalvoRepository salvoRepository;
+    @Autowired
+    private ShipRepository shipRepository;
 
     private Player getCurrentUser(Authentication authentication) {
         System.out.println("Current: " + authentication.getName());
@@ -91,8 +93,20 @@ public class SalvoController {
         return playerRepository.findAll().stream().map(player -> playerMap(player)).collect(toList());
     }
 
-//    @RequestMapping("/games/players/{gamePlayerId}/ships")
-//    public List<Object>
+    @RequestMapping(value = "/games/players/{gamePlayerId}/ships", method = RequestMethod.POST)
+    public HttpStatus getShips(@PathVariable long nn, Authentication authentication, @RequestBody List<Ship> ships) {
+        GamePlayer gamePlayer = gameplayerrepo.findById(nn);
+        ships.stream().forEach(ship -> {
+            ship.setGamePlayer(gamePlayer);
+            shipRepository.save(ship);
+        });
+        if (authentication == null || gamePlayer == null || gamePlayer.getPlayer() != getCurrentUser(authentication)) {
+            return HttpStatus.UNAUTHORIZED;
+        } else if (gamePlayer.getShips() != null){
+            return HttpStatus.FORBIDDEN;
+        }
+        return HttpStatus.CREATED;
+    }
 
     @GetMapping("/game_view/{nn}")
     public ResponseEntity<Map<String, Object>> getGameView(@PathVariable long nn, Authentication authentication) {
