@@ -77,14 +77,14 @@ public class SalvoApplication {
             gameplayerrepository.save(gamePlayer4);
 
             GamePlayer gamePlayer5 = new GamePlayer( game3, player5);
-            GamePlayer gamePlayer6 = new GamePlayer( game3, player6);
+//            GamePlayer gamePlayer6 = new GamePlayer( game3, player6);
             gameplayerrepository.save(gamePlayer5);
-            gameplayerrepository.save(gamePlayer6);
+//            gameplayerrepository.save(gamePlayer6);
 
             GamePlayer gamePlayer7 = new GamePlayer( game4, player7);
-            GamePlayer gamePlayer8 = new GamePlayer( game4, player8);
+//            GamePlayer gamePlayer8 = new GamePlayer( game4, player8);
             gameplayerrepository.save(gamePlayer7);
-            gameplayerrepository.save(gamePlayer8);
+//            gameplayerrepository.save(gamePlayer8);
 
 			List<String> loc1 = Arrays.asList("D3", "E3", "F3");
 			List<String> loc2 = Arrays.asList("B5","B6","B7","B8","B9");
@@ -207,6 +207,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/game.js").permitAll()
                 .antMatchers("/web/style.css").permitAll()
                 .antMatchers("/api/leaderboard").permitAll()
+                .antMatchers("/api/game/*/players").permitAll()
                 .antMatchers("/web/games_style.css").permitAll()
                 .antMatchers("/api/games").permitAll()
                 .antMatchers("/api/players").permitAll()

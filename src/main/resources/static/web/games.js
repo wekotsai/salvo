@@ -85,11 +85,27 @@ function createGame() {
     .fail(err => {errorMessage = err, console.log(errorMessage), alert("ERROR"), errorStatus = true})
  }
 
+function placeShips() {
+let type =
+let location1 =
+$.post({
+url: `api/games/players/${gpid}/ships`,
+data: JSON.stringify({type: type, location: location1}),
+dataType: "text",
+contentType: "application/json"
+})
+.done(function (response, status, jqXHR) {
+  alert( "Ship added: " + response );
+})
+.fail(function (jqXHR, status, httpError) {
+  alert("Failed to add ship: " + textStatus + " " + httpError);
+})
+}
+
 //document.getElementById("joinG").addEventListener("click", joinGame);
 function joinGame(id) {
 console.log("huhuh2 " + id)
-
-  $.post("/api/game/${id}/players", {})
+  $.post(`/api/game/${id}/players`, {})
     .done(res => {
         console.log(res),
         location.replace(`http://localhost:8080/web/game.html?gp=${id}`)
@@ -167,6 +183,7 @@ function getGamesList(json) {
    var gameList = [];
    var templateTest = '';
     json.games.forEach((gm, i) => {
+            if (gm.players.length == 2) {
              templateTest += `
              <tr>
              <td>${gm.gameid}</td>
@@ -174,6 +191,15 @@ function getGamesList(json) {
              <td><button id="joinG" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame(${gm.gameid})">Join Game</button></td>
              </tr>
              `;
+             } else if (gm.players.length == 1) {
+             templateTest += `
+                          <tr>
+                          <td>${gm.gameid}</td>
+                          <td>${gm.players[0].player.email} </td>
+                          <td><button id="joinG" class="btn btn-lg btn-primary text-uppercase" onclick="joinGame(${gm.gameid})">Join Game</button></td>
+                          </tr>
+                          `;
+             }
              var table = document.getElementById('gameTbody');
              table.innerHTML = templateTest;
          })
