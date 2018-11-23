@@ -132,7 +132,7 @@ public class SalvoController {
             if (game == null) {
                 return new ResponseEntity<>(Map("Error", "No such game"), HttpStatus.FORBIDDEN);
             } else {
-                if (game.getGamePlayers().size() > 2){
+                if (game.getGamePlayers().size() < 2){
                     return new ResponseEntity<>(Map("Error", "Game is full"), HttpStatus.FORBIDDEN);
                 } else {
                     GamePlayer gamePlayer = new GamePlayer(game, currentUser);
