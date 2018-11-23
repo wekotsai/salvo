@@ -7,7 +7,7 @@
              let gameList = getGamesList(gamesData);
              changeUrl(gamesData);
              loggedInUser(gamesData);
- })
+          })
 
     fetch('../api/leaderboard')
           .then(res => res.json())
@@ -16,9 +16,7 @@
              console.log(playersData);
               let playerList = getPlayerList(playersData);
               displayScore(playerList);
-  })
-
-
+           })
 
 var errorStatus = false;
 
@@ -69,7 +67,6 @@ function changeUrl(json) {
         }
 }
 
-
 function register() {
     document.getElementById("regForm").style.display = "block";
 }
@@ -85,26 +82,8 @@ function createGame() {
     .fail(err => {errorMessage = err, console.log(errorMessage), alert("ERROR"), errorStatus = true})
  }
 
-function placeShips() {
-let type =
-let location1 =
-$.post({
-url: `api/games/players/${gpid}/ships`,
-data: JSON.stringify({type: type, location: location1}),
-dataType: "text",
-contentType: "application/json"
-})
-.done(function (response, status, jqXHR) {
-  alert( "Ship added: " + response );
-})
-.fail(function (jqXHR, status, httpError) {
-  alert("Failed to add ship: " + textStatus + " " + httpError);
-})
-}
 
-//document.getElementById("joinG").addEventListener("click", joinGame);
 function joinGame(id) {
-console.log("huhuh2 " + id)
   $.post(`/api/game/${id}/players`, {})
     .done(res => {
         console.log(res),

@@ -20,7 +20,12 @@ fetch(`../api/game_view/${id}`)
         mySalvoes = myJson.salvoes;
         myOpponentsSalvoes = myJson.opponentsSalvoes;
         markShips(myShips, "myTable");
-        markShips(mySalvoes, "salvoTable");
+
+        if (myShips.length < 5) {
+            placeShips()
+        } else {
+            markShips(mySalvoes, "salvoTable");
+        }
         name(myShips, myOpponentsSalvoes, "ship", "myTable");
         name1(mySalvoes, hitTheOpp, "salvo", "salvoTable");
         getGP(myGP);
@@ -97,3 +102,30 @@ function name(my, opponent, someVar, table) {
                 })
 
         };
+
+var shipsList = [
+{type: "destroyer", locations: []},
+{type: "carrier", locations: []},
+{type: "submarine", locations: []},
+{type: "battleship", locations: []},
+{type: "patrolBoat", locations: []}
+]
+
+//document.getElementById('click').addEventListener('click', placeShips(3))
+function placeShips(gpid) {
+console.log("Something")
+$.post({
+    url: `localhost:8080/api/games/players/${gpid}/ships`,
+    data: JSON.stringify({
+    shipsList
+    }),
+    dataType: "text",
+    contentType: "application/json"
+    })
+    .done(function (response, status, jqXHR) {
+      alert( "Ship added: " + response );
+    })
+    .fail(function (jqXHR, status, httpError) {
+      alert("Failed to add ship: " + textStatus + " " + httpError);
+    })
+ }

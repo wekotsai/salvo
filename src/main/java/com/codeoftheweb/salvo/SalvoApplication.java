@@ -208,11 +208,14 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/style.css").permitAll()
                 .antMatchers("/api/leaderboard").permitAll()
                 .antMatchers("/api/game/*/players").permitAll()
+                .antMatchers("/api/games/players/*/ships").permitAll()
                 .antMatchers("/web/games_style.css").permitAll()
                 .antMatchers("/api/games").permitAll()
                 .antMatchers("/api/players").permitAll()
                 .antMatchers("/api/game_view/**").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/**").hasAuthority("USER");
+
 
         http.formLogin()
                 .usernameParameter("userName")

@@ -93,9 +93,10 @@ public class SalvoController {
         return playerRepository.findAll().stream().map(player -> playerMap(player)).collect(toList());
     }
 
-    @RequestMapping(value = "/games/players/{gamePlayerId}/ships", method = RequestMethod.POST)
-    public HttpStatus getShips(@PathVariable long nn, Authentication authentication, @RequestBody List<Ship> ships) {
-        GamePlayer gamePlayer = gameplayerrepo.findById(nn);
+    @RequestMapping(value = "/games/players/{gpid}/ships", method = RequestMethod.POST)
+    public HttpStatus getShips(@PathVariable long gpid, Authentication authentication, @RequestBody List<Ship> ships) {
+
+        GamePlayer gamePlayer = gameplayerrepo.findById(gpid);
         ships.stream().forEach(ship -> {
             ship.setGamePlayer(gamePlayer);
             shipRepository.save(ship);
