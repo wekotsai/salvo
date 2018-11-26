@@ -104,13 +104,14 @@ function signup() {
    .fail(err => {errorMessage = err, console.log(errorMessage), errorStatus = true})
 }
 
-    function logout() {
+
+function logout() {
         fetch("/api/logout",{
         }).then(function (res) {
             location.reload();
         })
             .catch(function(res){ console.log(res) });
-        }
+}
 
 function getPlayerList(playersData) {
     var playerList = [];

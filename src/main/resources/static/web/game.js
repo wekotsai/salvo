@@ -11,7 +11,7 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
-    console.log(myJson)
+//    console.log("hihi" + JSON.stringify(myJson))
     var gp1 = myJson.gamePlayer[0].gp_id;
     var gp2 = myJson.gamePlayer[1].gp_id;
         if (myJson.gp_id == gp1 || myJson.gp_id == gp2) {
@@ -112,9 +112,8 @@ var shipsList = [
 {type: "patrolBoat", locations: []}
 ]
 
-//document.getElementById('click').addEventListener('click', placeShips(3))
+
 function placeShips(gpid) {
-console.log("Something")
 $.post({
     url: `localhost:8080/api/games/players/${gpid}/ships`,
     data: JSON.stringify({
@@ -126,7 +125,7 @@ $.post({
     .done(function (response, status, jqXHR) {
       alert( "Ship added: " + response );
     })
-    .fail(function (jqXHR, status, httpError) {
-      alert("Failed to add ship: " + textStatus + " " + httpError);
+    .fail(function (error) {
+      alert("Failed to add ship: " + error);
     })
  }
