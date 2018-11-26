@@ -11,6 +11,7 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
+    console.log(myJson)
     var gp1 = myJson.gamePlayer[0].gp_id;
     var gp2 = myJson.gamePlayer[1].gp_id;
         if (myJson.gp_id == gp1 || myJson.gp_id == gp2) {
