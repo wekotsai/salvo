@@ -158,7 +158,7 @@ $.post({
 //      document.getElementById(`${ship.type}`).style.backgroundColor = "green";
 //      }
 //      })
-      document.getElementById(`${type}`).style.backgroundColor = "purple";
+      document.getElementById(`${type}`).style.backgroundColor = "lawngreen";
    }
 
  function direction(type) {
@@ -169,5 +169,19 @@ $.post({
     document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
 
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
+ }
+
+ function allowDrop(ev) {
+     ev.preventDefault();
+ }
+
+ function drag(ev) {
+     ev.dataTransfer.setData("text", ev.target.id);
+ }
+
+ function drop(ev) {
+     ev.preventDefault();
+     var data = ev.dataTransfer.getData("text");
+     ev.target.appendChild(document.getElementById(data));
  }
 
