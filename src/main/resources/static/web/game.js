@@ -34,7 +34,6 @@ fetch(`../api/game_view/${id}`)
     });
 
 function getGP(myGP) {
-
     var template = '';
     myGP.forEach(gp => {
         template += `
@@ -129,3 +128,32 @@ $.post({
       alert("Failed to add ship: " + error);
     })
  }
+
+ function placeNewShips() {
+
+ }
+
+ function selectShip(type) {
+      document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
+      document.getElementById('carrier').style.backgroundColor = "deepskyblue";
+      document.getElementById('battleship').style.backgroundColor = "deepskyblue";
+      document.getElementById('submarine').style.backgroundColor = "deepskyblue";
+      document.getElementById('patrolBoat').style.backgroundColor = "deepskyblue";
+//      shipsList.forEach (ship => {
+//      if (ship.location.length >= 2) {
+//      document.getElementById(`${ship.type}`).style.backgroundColor = "green";
+//      }
+//      })
+      document.getElementById(`${type}`).style.backgroundColor = "purple";
+   }
+
+ function direction(type) {
+    document.getElementById('destroyer').style.transform = "rotate(0deg)";
+    document.getElementById('carrier').style.transform = "rotate(0deg)";
+    document.getElementById('battleship').style.transform = "rotate(0deg)";
+    document.getElementById('submarine').style.transform = "rotate(0deg)";
+    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
+
+    document.getElementById(`${type}`).style.transform = "rotate(90deg)";
+ }
+
