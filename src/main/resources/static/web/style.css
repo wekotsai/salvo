@@ -30,8 +30,13 @@ h1, p {
   background-color: red;
 }
 
+td {
+ width: 45px;
+ height: 45px;
+}
+
 #myTable {
-  display: table;
+  display: inline-table;
   width: 495px;
   height: 495px;
   table-layout: fixed;
