@@ -27,31 +27,31 @@
                 </div>
 
              <div>
-                <table class="ship" id="destroyer" border="1" onclick="selectShip('destroyer')" ondblclick="direction('destroyer')" draggable="true" ondragstart="drag(event)">
+                <table class="ship" id="destroyer" border="1" onclick="selectShip('destroyer')" ondblclick="direction('destroyer')" draggable="true" ondragstart="drag(event, 'destroyer')">
                     <tr>
                         <th>Destroyer</th> <th>&nbsp</th>
                     </tr>
                 </table>
             <br>
-                <table class="ship" id="patrolBoat" border="1" onclick="selectShip('patrolBoat')" ondblclick="direction('patrolBoat')" draggable="true" ondragstart="drag(event)">
+                <table class="ship" id="patrolBoat" border="1" onclick="selectShip('patrolBoat')" ondblclick="direction('patrolBoat')" draggable="true" ondragstart="drag(event, 'patrolBoat')">
                     <tr>
                         <th>Patrol</th> <th>&nbsp</th> <th>&nbsp</th>
                     </tr>
                 </table>
             <br>
-                <table class="ship" id="battleship" border="1" onclick="selectShip('battleship')" ondblclick="direction('battleship')" draggable="true" ondragstart="drag(event)">
+                <table class="ship" id="battleship" border="1" onclick="selectShip('battleship')" ondblclick="direction('battleship')" draggable="true" ondragstart="drag(event, 'battleship')">
                     <tr>
                         <th>Battleship</th> <th>&nbsp</th> <th>&nbsp</th> <th>&nbsp</th>
                     </tr>
                 </table>
             <br>
-                <table class="ship" id="carrier" border="1" onclick="selectShip('carrier')" ondblclick="direction('carrier')" draggable="true" ondragstart="drag(event)">
+                <table class="ship" id="carrier" border="1" onclick="selectShip('carrier')" ondblclick="direction('carrier')" draggable="true" ondragstart="drag(event, 'carrier')">
                     <tr>
                         <th>Carrier</th> <th>&nbsp</th> <th>&nbsp</th> <th>&nbsp</th> <th>&nbsp</th>
                     </tr>
                 </table>
             <br>
-                <table class="ship" id="submarine" border="1" onclick="selectShip('submarine')" ondblclick="direction('submarine')" draggable="true" ondragstart="drag(event)">
+                <table class="ship" id="submarine" border="1" onclick="selectShip('submarine')" ondblclick="direction('submarine')" draggable="true" ondragstart="drag(event, 'submarine')">
                     <tr>
                         <th>Submarine</th> <th>&nbsp</th> <th>&nbsp</th>
                     </tr>
@@ -59,8 +59,11 @@
              <br>
              </div>
 
+
              <div class="text-center">
-                     <button id="submit" class="btn btn-lg btn-primary text-uppercase" onclick="submit()">Submit</button>
+                     <button id="refresh" class="btn btn-md btn-primary text-uppercase" onclick="refresh()">Refresh</button>
+
+                     <button id="submit" class="btn btn-md btn-primary text-uppercase" onclick="submit()">Submit</button>
                  </div>
              </div>
 

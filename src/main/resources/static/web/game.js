@@ -41,7 +41,7 @@ function getGP(myGP) {
     myGP.forEach(gp => {
         template += `
         <p> Username: ${gp.player.email} </p>
-        <!-- if gp.player.id = url id, ?(display) "Player" :(else) "Viewer" -->
+        <!-- if gp.player.id = id then ?(display) "Player" :(else) "Viewer" -->
         <p> ${gp.player.player_id.toString() === id ? "(Player)" : "(Viewer)"} </p>
        `;
     });
@@ -101,10 +101,9 @@ function placeSalvos() {
     })
 }
 
-
-function name(my, opponent, someVar, table) {
+function name(me, opponent, someVar, table) {
     // print ship location
-    my.forEach(ship => {
+    me.forEach(ship => {
         let checked = [];
         ship.location.forEach(location1 => {
             opponent.forEach(salvo => {
@@ -122,9 +121,9 @@ function name(my, opponent, someVar, table) {
     });
 }
 
-function name1(my, salvo, someVar, table) {
+function name1(me, salvo, someVar, table) {
     // print ship location
-    my.forEach(ship => {
+    me.forEach(ship => {
         let checked = [];
         ship.location.forEach(location1 => {
             salvo.forEach(location2 => {
@@ -137,32 +136,67 @@ function name1(my, salvo, someVar, table) {
             })
         })
     })
-
 };
 
 var shipsList = [
+     {
+         type: "destroyer",
+         locations: []
+     },
+     {
+         type: "carrier",
+         locations: []
+     },
+     {
+         type: "submarine",
+         locations: []
+     },
+     {
+         type: "battleship",
+         locations: []
+     },
+     {
+         type: "patrolBoat",
+         locations: []
+     }
+ ]
+
+
+var shipsInfo = [
     {
         type: "destroyer",
-        locations: []
+        locations: [],
+        direction: "horizontal",
+        size: 2
     },
     {
         type: "carrier",
-        locations: []
+        locations: [],
+        direction: "horizontal",
+        size: 5
     },
     {
         type: "submarine",
-        locations: []
+        locations: [],
+        direction: "horizontal",
+        size: 3
     },
     {
         type: "battleship",
-        locations: []
+        locations: [],
+        direction: "horizontal",
+        size: 4
     },
     {
         type: "patrolBoat",
-        locations: []
+        locations: [],
+        direction: "horizontal",
+        size: 3
     }
 ]
-
+function refresh() {
+    location.reload();
+}
 //function submit() {
 //}
 
@@ -182,7 +216,7 @@ function placedShips(gpid) {
             alert("Failed to add ship: " + error);
         })
 }
-
+var selectedShip = ""
 function selectShip(type) {
     document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
     document.getElementById('carrier').style.backgroundColor = "deepskyblue";
@@ -195,6 +229,7 @@ function selectShip(type) {
     //      }
     //      })
     document.getElementById(`${type}`).style.backgroundColor = "lawngreen";
+    selectedShip = type;
 }
 
 function direction(type) {
@@ -204,6 +239,17 @@ function direction(type) {
     //    document.getElementById('submarine').style.transform = "rotate(0deg)";
     //    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
+    shipsInfo.forEach(ship => {
+    let checked = false;
+        if (ship.type == type) {
+            if (ship.direction == "horizontal") {
+                ship.direction = "vertical"
+                checked = true;
+            } else if (!checked) {
+                ship.direction = "horizontal";
+            }
+        }
+    })
 }
 
 function allowDrop(ev) {
@@ -216,6 +262,24 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
+
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
+    let list = [];
+    let firstLoc = ev.target.id;
+    console.log(selectedShip)
+    shipsInfo.forEach(ship => {
+        if (ship.type == selectedShip) {
+            console.log(ship.direction)
+            console.log(ship.size)
+        }
+    })
+    console.log(ev.target.id);
+    let split = ev.target.id.split("");
+    let letter = split[0];
+    let number = firstLoc.match(/\d+/g).map(Number)[0]
+    let newLoc = letter + number;
+    for (i=1; i<size; i++) {
+    }
 }
+
