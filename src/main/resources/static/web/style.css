@@ -35,6 +35,10 @@ td {
  height: 45px;
 }
 
+.selected {
+  background-color: red;
+}
+
 #myTable {
   display: inline-table;
   width: 495px;
@@ -107,6 +111,10 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+}
+
+#submit {
+margin-bottom: 20px;
 }
 
 /* animated background */

@@ -11,26 +11,28 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
-//    console.log("hihi" + JSON.stringify(myJson))
-    var gp1 = myJson.gamePlayer[0].gp_id;
-    var gp2 = myJson.gamePlayer[1].gp_id;
+        //    console.log("hihi" + JSON.stringify(myJson))
+        var gp1 = myJson.gamePlayer[0].gp_id;
+        var gp2 = myJson.gamePlayer[1].gp_id;
         if (myJson.gp_id == gp1 || myJson.gp_id == gp2) {
-        myShips = myJson.ships;
-        myGP = myJson.gamePlayer;
-        hitTheOpp = myJson.hitTheOpp;
-        mySalvoes = myJson.salvoes;
-        myOpponentsSalvoes = myJson.opponentsSalvoes;
-        markShips(myShips, "myTable");
-        placeNewShip()
+            myShips = myJson.ships;
+            myGP = myJson.gamePlayer;
+            hitTheOpp = myJson.hitTheOpp;
+            mySalvoes = myJson.salvoes;
+            myOpponentsSalvoes = myJson.opponentsSalvoes;
+            markShips(myShips, "myTable");
+            markShips(mySalvoes, "salvoTable"); // remove this line and uncomment 27-31 after testing
+            placeNewShip();
+            placeSalvos();
 
-        if (myShips.length < 5) {
-            placedShips()
-        } else {
-            markShips(mySalvoes, "salvoTable");
-        }
-        name(myShips, myOpponentsSalvoes, "ship", "myTable");
-        name1(mySalvoes, hitTheOpp, "salvo", "salvoTable");
-        getGP(myGP);
+//            if (myShips.length < 5) {
+//                placedShips()
+//            } else {
+//                markShips(mySalvoes, "salvoTable");
+//            }
+            name(myShips, myOpponentsSalvoes, "ship", "myTable");
+            name1(mySalvoes, hitTheOpp, "salvo", "salvoTable");
+            getGP(myGP);
         }
     });
 
@@ -43,10 +45,9 @@ function getGP(myGP) {
         <p> ${gp.player.player_id.toString() === id ? "(Player)" : "(Viewer)"} </p>
        `;
     });
-   var email = document.getElementById('email');
-   email.innerHTML = template;
+    var email = document.getElementById('email');
+    email.innerHTML = template;
 }
-
 
 function markShips(myShips, table) {
 
@@ -66,24 +67,40 @@ function markShips(myShips, table) {
     }
 }
 
- function placeNewShip() {
-     var tbl = document.getElementById('myTable');
-     if (tbl != null) {
-     for (var i=0; i<tbl.rows.length; i++) {
-        for(var j=0; j<tbl.rows[i].cells.length; j++){
-            tbl.rows[i].cells[j].onclick = function () {
-            cellVal(this);
+function placeNewShip() {
+    var tbl = document.getElementById('myTable');
+    if (tbl != null) {
+        for (var i = 0; i < tbl.rows.length; i++) {
+            for (var j = 0; j < tbl.rows[i].cells.length; j++) {
+                tbl.rows[i].cells[j].onclick = function () {
+                    ShipCellVal(this);
+                }
             }
         }
-     }
- }
- }
-
-function cellVal(cell) {
-     var row = document.getElementById('myTable');
-     var cells = row.getElementsByTagName("td");
-     alert(cells[0].innerText);
+    }
 }
+// alert
+function ShipCellVal(cell) {
+    var row = document.getElementById('myTable');
+    var cells = row.getElementsByTagName('td');
+    alert(cells[0].innerText);
+}
+
+function placeSalvos() {
+    var table = document.querySelector('#salvoTable');
+    var selectedCells = table.getElementsByClassName('selected')
+    table.addEventListener('click', function (e) {
+    var td = e.target
+    if (td.tagName !== 'TD') {
+    return
+    }
+    if (selectedCells.length) {
+    selectedCells[0].className = ''
+    }
+    td.className = 'selected'
+    })
+}
+
 
 function name(my, opponent, someVar, table) {
     // print ship location
@@ -105,105 +122,100 @@ function name(my, opponent, someVar, table) {
     });
 }
 
-    function name1(my, salvo, someVar, table) {
-        // print ship location
-        my.forEach(ship => {
-            let checked = [];
-            ship.location.forEach(location1 => {
-                    salvo.forEach(location2 => {
-                        if (!checked.includes((location1)) && !checked.includes(location2))
-                            if (location1 == location2) {
-                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add("hit")
-                            } else {
-                                document.getElementById(table).querySelector(`#${ location1 }`).classList.add(someVar)
-                            }
-                        })
-                    })
-                })
+function name1(my, salvo, someVar, table) {
+    // print ship location
+    my.forEach(ship => {
+        let checked = [];
+        ship.location.forEach(location1 => {
+            salvo.forEach(location2 => {
+                if (!checked.includes((location1)) && !checked.includes(location2))
+                    if (location1 == location2) {
+                        document.getElementById(table).querySelector(`#${ location1 }`).classList.add("hit")
+                    } else {
+                        document.getElementById(table).querySelector(`#${ location1 }`).classList.add(someVar)
+                    }
+            })
+        })
+    })
 
-        };
+};
 
 var shipsList = [
-{type: "destroyer", locations: []},
-{type: "carrier", locations: []},
-{type: "submarine", locations: []},
-{type: "battleship", locations: []},
-{type: "patrolBoat", locations: []}
+    {
+        type: "destroyer",
+        locations: []
+    },
+    {
+        type: "carrier",
+        locations: []
+    },
+    {
+        type: "submarine",
+        locations: []
+    },
+    {
+        type: "battleship",
+        locations: []
+    },
+    {
+        type: "patrolBoat",
+        locations: []
+    }
 ]
 
-//function shipLoc() {
+//function submit() {
 //}
 
 function placedShips(gpid) {
-$.post({
-    url: `localhost:8080/api/games/players/${gpid}/ships`,
-    data: JSON.stringify({
-    shipsList
-    }),
-    dataType: "text",
-    contentType: "application/json"
-    })
-    .done(function (response, status, jqXHR) {
-      alert( "Ship added: " + response );
-    })
-    .fail(function (error) {
-      alert("Failed to add ship: " + error);
-    })
- }
+    $.post({
+            url: `localhost:8080/api/games/players/${gpid}/ships`,
+            data: JSON.stringify({
+                shipsList
+            }),
+            dataType: "text",
+            contentType: "application/json"
+        })
+        .done(function (response, status, jqXHR) {
+            alert("Ship added: " + response);
+        })
+        .fail(function (error) {
+            alert("Failed to add ship: " + error);
+        })
+}
 
-//var salvoList = []
-//
-// function storeSalvos() {
-// $.post({
-//     url: `localhost:8080/api/games/players/${gpid}/salvos`,
-//     data: JSON.stringify({
-//     salvoList
-//     }),
-//     dataType: "text",
-//     contentType: "application/json"
-//     })
-//     .done(function (response, status, jqXHR) {
-//       alert( "Ship added: " + response );
-//     })
-//     .fail(function (error) {
-//       alert("Failed to add ship: " + error);
-//     })
-// }
+function selectShip(type) {
+    document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
+    document.getElementById('carrier').style.backgroundColor = "deepskyblue";
+    document.getElementById('battleship').style.backgroundColor = "deepskyblue";
+    document.getElementById('submarine').style.backgroundColor = "deepskyblue";
+    document.getElementById('patrolBoat').style.backgroundColor = "deepskyblue";
+    //      shipsList.forEach (ship => {
+    //      if (ship.location.length >= 2) {
+    //      document.getElementById(`${ship.type}`).style.backgroundColor = "green";
+    //      }
+    //      })
+    document.getElementById(`${type}`).style.backgroundColor = "lawngreen";
+}
 
- function selectShip(type) {
-      document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
-      document.getElementById('carrier').style.backgroundColor = "deepskyblue";
-      document.getElementById('battleship').style.backgroundColor = "deepskyblue";
-      document.getElementById('submarine').style.backgroundColor = "deepskyblue";
-      document.getElementById('patrolBoat').style.backgroundColor = "deepskyblue";
-//      shipsList.forEach (ship => {
-//      if (ship.location.length >= 2) {
-//      document.getElementById(`${ship.type}`).style.backgroundColor = "green";
-//      }
-//      })
-      document.getElementById(`${type}`).style.backgroundColor = "lawngreen";
-   }
-
- function direction(type) {
-//    document.getElementById('destroyer').style.transform = "rotate(0deg)";
-//    document.getElementById('carrier').style.transform = "rotate(0deg)";
-//    document.getElementById('battleship').style.transform = "rotate(0deg)";
-//    document.getElementById('submarine').style.transform = "rotate(0deg)";
-//    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
+function direction(type) {
+    //    document.getElementById('destroyer').style.transform = "rotate(0deg)";
+    //    document.getElementById('carrier').style.transform = "rotate(0deg)";
+    //    document.getElementById('battleship').style.transform = "rotate(0deg)";
+    //    document.getElementById('submarine').style.transform = "rotate(0deg)";
+    //    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
- }
+}
 
- function allowDrop(ev) {
-     ev.preventDefault();
- }
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
- function drag(ev) {
-     ev.dataTransfer.setData("text", ev.target.id);
- }
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
 
- function drop(ev) {
-     ev.preventDefault();
-     var data = ev.dataTransfer.getData("text");
-     ev.target.appendChild(document.getElementById(data));
- }
-
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}

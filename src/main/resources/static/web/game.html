@@ -19,12 +19,12 @@
         <span></span>
         <span></span>
 
-    <div class="container">
-        <h6 id="email"></h6>
-        <div class="tables">
-        <table id="myTable" border="1" style="cursor: pointer" ondrop="drop(event)" ondragover="allowDrop(event)"></table>
-        <table id="salvoTable" border="1"></table>
-        </div>
+         <div class="container">
+            <h6 id="email"></h6>
+                <div class="tables">
+                <table id="myTable" border="1" style="cursor: pointer" ondrop="drop(event)" ondragover="allowDrop(event)"></table>
+                <table id="salvoTable" border="1" style="cursor: pointer"></table>
+                </div>
 
              <div>
                 <table class="ship" id="destroyer" border="1" onclick="selectShip('destroyer')" ondblclick="direction('destroyer')" draggable="true" ondragstart="drag(event)">
@@ -57,7 +57,13 @@
                     </tr>
                 </table>
              <br>
-        </div>
+             </div>
+
+             <div class="text-center">
+                     <button id="submit" class="btn btn-lg btn-primary text-uppercase" onclick="submit()">Submit</button>
+                 </div>
+             </div>
+
         </div>
     </div>
 </div>
