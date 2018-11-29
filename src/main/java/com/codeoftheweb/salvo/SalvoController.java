@@ -113,6 +113,26 @@ public class SalvoController {
         }
     }
 
+    @RequestMapping(value = "/games/players/{gpid}/salvos", method = RequestMethod.POST)
+    public HttpStatus getSalvoes(@PathVariable long gpid, Authentication authentication, @RequestBody List<Salvo> salvos) {
+        System.out.println(salvos);
+
+        GamePlayer gamePlayer = gameplayerrepo.findById(gpid);
+        salvos.stream().forEach(salvo -> {
+            salvo.setGamePlayer(gamePlayer);
+            salvoRepository.save(salvo);
+        });
+        if (authentication == null || gamePlayer == null || gamePlayer.getPlayer() != getCurrentUser(authentication)) {
+            return HttpStatus.UNAUTHORIZED;
+        } else if (gamePlayer.getShips() != null){
+            return HttpStatus.FORBIDDEN;
+        } else {
+            salvos.forEach(salvo -> gamePlayer.addSalvo(salvo));
+            salvos.forEach(salvo -> salvoRepository.save(salvo));
+            return HttpStatus.CREATED;
+        }
+    }
+
     @GetMapping("/game_view/{nn}")
     public ResponseEntity<Map<String, Object>> getGameView(@PathVariable long nn, Authentication authentication) {
         Map<String, Object> newId = new LinkedHashMap<>();

@@ -68,7 +68,6 @@ function markShips(myShips, table) {
 
  function placeNewShip() {
      var tbl = document.getElementById('myTable');
-     console.log(tbl)
      if (tbl != null) {
      for (var i=0; i<tbl.rows.length; i++) {
         for(var j=0; j<tbl.rows[i].cells.length; j++){
@@ -81,7 +80,9 @@ function markShips(myShips, table) {
  }
 
 function cellVal(cell) {
-     alert(cell.td);
+     var row = document.getElementById('myTable');
+     var cells = row.getElementsByTagName("td");
+     alert(cells[0].innerText);
 }
 
 function name(my, opponent, someVar, table) {
@@ -130,6 +131,9 @@ var shipsList = [
 {type: "patrolBoat", locations: []}
 ]
 
+//function shipLoc() {
+//}
+
 function placedShips(gpid) {
 $.post({
     url: `localhost:8080/api/games/players/${gpid}/ships`,
@@ -147,6 +151,25 @@ $.post({
     })
  }
 
+//var salvoList = []
+//
+// function storeSalvos() {
+// $.post({
+//     url: `localhost:8080/api/games/players/${gpid}/salvos`,
+//     data: JSON.stringify({
+//     salvoList
+//     }),
+//     dataType: "text",
+//     contentType: "application/json"
+//     })
+//     .done(function (response, status, jqXHR) {
+//       alert( "Ship added: " + response );
+//     })
+//     .fail(function (error) {
+//       alert("Failed to add ship: " + error);
+//     })
+// }
+
  function selectShip(type) {
       document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
       document.getElementById('carrier').style.backgroundColor = "deepskyblue";
@@ -162,12 +185,11 @@ $.post({
    }
 
  function direction(type) {
-    document.getElementById('destroyer').style.transform = "rotate(0deg)";
-    document.getElementById('carrier').style.transform = "rotate(0deg)";
-    document.getElementById('battleship').style.transform = "rotate(0deg)";
-    document.getElementById('submarine').style.transform = "rotate(0deg)";
-    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
-
+//    document.getElementById('destroyer').style.transform = "rotate(0deg)";
+//    document.getElementById('carrier').style.transform = "rotate(0deg)";
+//    document.getElementById('battleship').style.transform = "rotate(0deg)";
+//    document.getElementById('submarine').style.transform = "rotate(0deg)";
+//    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
  }
 
