@@ -91,11 +91,14 @@ function placeSalvos() {
     var selectedCells = table.getElementsByClassName('selected')
     table.addEventListener('click', function (e) {
     var td = e.target
-    if (td.tagName !== 'TD') {
+    if (td.tagName != 'TD') {
     return
     }
+
+
+
     if (selectedCells.length) {
-    selectedCells[0].className = ''
+    console.log(selectedCells[0].className)
     }
     td.className = 'selected'
     })
@@ -279,7 +282,8 @@ function drop(ev) {
     let letter = split[0];
     let number = firstLoc.match(/\d+/g).map(Number)[0]
     let newLoc = letter + number;
-    for (i=1; i<size; i++) {
-    }
+    shipsInfo[0].locations.push
+//    for (i=1; i<size; i++) {
+//    }
 }
 
