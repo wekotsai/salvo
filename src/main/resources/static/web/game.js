@@ -95,13 +95,13 @@ function placeSalvos() {
     return
     }
 
-
-
     if (selectedCells.length) {
     console.log(selectedCells[0].className)
     }
     td.className = 'selected'
     })
+
+
 }
 
 function name(me, opponent, someVar, table) {
@@ -200,10 +200,9 @@ var shipsInfo = [
 function refresh() {
     location.reload();
 }
-//function submit() {
-//}
 
-function placedShips(gpid) {
+function placedShips() {
+//    check structure let gpid = data.current.gpid
     $.post({
             url: `localhost:8080/api/games/players/${gpid}/ships`,
             data: JSON.stringify({
@@ -236,11 +235,6 @@ function selectShip(type) {
 }
 
 function direction(type) {
-    //    document.getElementById('destroyer').style.transform = "rotate(0deg)";
-    //    document.getElementById('carrier').style.transform = "rotate(0deg)";
-    //    document.getElementById('battleship').style.transform = "rotate(0deg)";
-    //    document.getElementById('submarine').style.transform = "rotate(0deg)";
-    //    document.getElementById('patrolBoat').style.transform = "rotate(0deg)";
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
     shipsInfo.forEach(ship => {
     let checked = false;
@@ -271,19 +265,50 @@ function drop(ev) {
     let list = [];
     let firstLoc = ev.target.id;
     console.log(selectedShip)
-    shipsInfo.forEach(ship => {
-        if (ship.type == selectedShip) {
-            console.log(ship.direction)
-            console.log(ship.size)
-        }
-    })
-    console.log(ev.target.id);
     let split = ev.target.id.split("");
     let letter = split[0];
     let number = firstLoc.match(/\d+/g).map(Number)[0]
     let newLoc = letter + number;
-    shipsInfo[0].locations.push
-//    for (i=1; i<size; i++) {
-//    }
+    list.push(newLoc);
+    shipsInfo.forEach(ship => {
+        if (ship.type == selectedShip) {
+            console.log(ship.direction)
+            console.log(ship.size)
+            console.log(firstLoc)
+            let newNumber = number;
+            let newLetter = letter;
+            for (i = 1; i<ship.size; i++) {
+                if (ship.direction== "horizontal") {
+                    newNumber++
+                    newLoc = letter + newNumber
+                    list.push(newLoc);
+                } else if (ship.direction == "vertical") {
+                    // find the next alphabet newLetter++
+                    newLoc = newLetter + number
+                    list.push(newLoc);
+                }
+            }
+            ship.locations = list;
+            console.log(list);
+            shipsList.forEach(newShip => {
+                if (ship.type == newShip.type) {
+                    newShip.locations = ship.locations
+                }
+            })
+            console.log(shipsList);
+        }
+    })
+
+
+//    shipsInfo.forEach(ship => {
+//
+//        if (ship.direction == "horizontal") {
+//            newLoc + (ship.size - 1)
+//        } else if (ship.direction == "vertical") {
+//            newLoc
+//        }
+//    })
+    // shipsInfo[0].locations.push
+
 }
 
