@@ -24,7 +24,6 @@ fetch(`../api/game_view/${id}`)
             markShips(mySalvoes, "salvoTable"); // remove this line and uncomment 27-31 after testing
             placeNewShip();
             placeSalvos();
-
 //            if (myShips.length < 5) {
 //                placedShips()
 //            } else {
@@ -36,6 +35,7 @@ fetch(`../api/game_view/${id}`)
         }
     });
 
+// get game players
 function getGP(myGP) {
     var template = '';
     myGP.forEach(gp => {
@@ -49,11 +49,10 @@ function getGP(myGP) {
     email.innerHTML = template;
 }
 
+// mark ships
 function markShips(myShips, table) {
-
     row = ["", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
     col = ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
     for (var r = 0; r < row.length; r++) {
         var x = document.getElementById(table).insertRow(r);
         for (var c = 0; c < col.length; c++) {
@@ -67,6 +66,14 @@ function markShips(myShips, table) {
     }
 }
 
+// alert when clicking on a cell
+function ShipCellVal(cell) {
+    var row = document.getElementById('myTable');
+    var cells = row.getElementsByTagName('td');
+    alert(cells[0].innerText);
+}
+
+// place new ship
 function placeNewShip() {
     var tbl = document.getElementById('myTable');
     if (tbl != null) {
@@ -79,13 +86,8 @@ function placeNewShip() {
         }
     }
 }
-// alert
-function ShipCellVal(cell) {
-    var row = document.getElementById('myTable');
-    var cells = row.getElementsByTagName('td');
-    alert(cells[0].innerText);
-}
 
+// place salvos
 function placeSalvos() {
     var table = document.querySelector('#salvoTable');
     var selectedCells = table.getElementsByClassName('selected')
@@ -94,18 +96,17 @@ function placeSalvos() {
     if (td.tagName != 'TD') {
     return
     }
-
-    if (selectedCells.length) {
-    console.log(selectedCells[0].className)
+    if (selectedCells.length >= 5 ) {
+    // console.log(selectedCells[0].className)
+    alert('you have exceeded 5 shots')
+    } else {
+     td.className = 'selected'
     }
-    td.className = 'selected'
     })
-
-
 }
 
+// print ship locations
 function name(me, opponent, someVar, table) {
-    // print ship location
     me.forEach(ship => {
         let checked = [];
         ship.location.forEach(location1 => {
@@ -124,8 +125,8 @@ function name(me, opponent, someVar, table) {
     });
 }
 
+  // print ship locations
 function name1(me, salvo, someVar, table) {
-    // print ship location
     me.forEach(ship => {
         let checked = [];
         ship.location.forEach(location1 => {
@@ -164,7 +165,6 @@ var shipsList = [
      }
  ]
 
-
 var shipsInfo = [
     {
         type: "destroyer",
@@ -197,6 +197,7 @@ var shipsInfo = [
         size: 3
     }
 ]
+
 function refresh() {
     location.reload();
 }
@@ -218,6 +219,8 @@ function placedShips() {
             alert("Failed to add ship: " + error);
         })
 }
+
+// select a ship
 var selectedShip = ""
 function selectShip(type) {
     document.getElementById('destroyer').style.backgroundColor = "deepskyblue";
@@ -234,6 +237,7 @@ function selectShip(type) {
     selectedShip = type;
 }
 
+// select direction
 function direction(type) {
     document.getElementById(`${type}`).style.transform = "rotate(90deg)";
     shipsInfo.forEach(ship => {
@@ -249,6 +253,7 @@ function direction(type) {
     })
 }
 
+// drag and drop
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -298,8 +303,6 @@ function drop(ev) {
             console.log(shipsList);
         }
     })
-
-
 //    shipsInfo.forEach(ship => {
 //
 //        if (ship.direction == "horizontal") {
@@ -309,6 +312,5 @@ function drop(ev) {
 //        }
 //    })
     // shipsInfo[0].locations.push
-
 }
 
