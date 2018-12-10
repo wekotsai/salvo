@@ -25,7 +25,7 @@ fetch(`../api/game_view/${id}`)
             placeNewShip();
             placeSalvos();
 //            if (myShips.length < 5) {
-//                placedShips()
+//                submit()
 //            } else {
 //                markShips(mySalvoes, "salvoTable");
 //            }
@@ -202,7 +202,7 @@ function refresh() {
     location.reload();
 }
 
-function placedShips() {
+function submit() {
 //    check structure let gpid = data.current.gpid
     $.post({
             url: `localhost:8080/api/games/players/${gpid}/ships`,
@@ -288,7 +288,7 @@ function drop(ev) {
                     newLoc = letter + newNumber
                     list.push(newLoc);
                 } else if (ship.direction == "vertical") {
-                    // find the next alphabet newLetter++
+                    // find the next alphabet for newLetter++
                     newLoc = newLetter + number
                     list.push(newLoc);
                 }
@@ -311,6 +311,6 @@ function drop(ev) {
 //            newLoc
 //        }
 //    })
-    // shipsInfo[0].locations.push
+// shipsInfo[0].locations.push
 }
 
