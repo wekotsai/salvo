@@ -11,7 +11,6 @@ fetch(`../api/game_view/${id}`)
         return response.json();
     })
     .then(function (myJson) {
-        //    console.log("hihi" + JSON.stringify(myJson))
         var gp1 = myJson.gamePlayer[0].gp_id;
         var gp2 = myJson.gamePlayer[1].gp_id;
         if (myJson.gp_id == gp1 || myJson.gp_id == gp2) {
@@ -97,11 +96,14 @@ function placeSalvos() {
     return
     }
     if (selectedCells.length >= 5 ) {
-    // console.log(selectedCells[0].className)
+      console.log(selectedCells[0].className)
+      console.log("my loc is " + td.id)
     alert('you have exceeded 5 shots')
     } else {
-     td.className = 'selected'
-    }
+        if(!salvoLoc.includes(td.id)) {
+            td.className = 'selected'
+            }
+        }
     })
 }
 
@@ -125,7 +127,7 @@ function name(me, opponent, someVar, table) {
     });
 }
 
-  // print ship locations
+ // print ship locations
 function name1(me, salvo, someVar, table) {
     me.forEach(ship => {
         let checked = [];
@@ -220,6 +222,16 @@ function submit() {
         })
 }
 
+//
+var salvoList = []
+function salvoLoc() {
+    mySalvoes.forEach(salvo => {
+        salvo.location.forEach(location => {
+            salvoLoc.push(location);
+        })
+    })
+}
+
 // select a ship
 var selectedShip = ""
 function selectShip(type) {
@@ -288,7 +300,7 @@ function drop(ev) {
                     newLoc = letter + newNumber
                     list.push(newLoc);
                 } else if (ship.direction == "vertical") {
-                    // find the next alphabet for newLetter++
+                    var newLetter = newLetter.substring(0, newLetter.length - 1) + String.fromCharCode(newLetter.charCodeAt(newLetter.length - 1) + 1)
                     newLoc = newLetter + number
                     list.push(newLoc);
                 }
