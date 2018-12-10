@@ -185,4 +185,3 @@ function getGamesList(json) {
          })
         return gameList
 }
-
