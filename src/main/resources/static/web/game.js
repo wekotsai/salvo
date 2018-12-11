@@ -20,14 +20,9 @@ fetch(`../api/game_view/${id}`)
             mySalvoes = myJson.salvoes;
             myOpponentsSalvoes = myJson.opponentsSalvoes;
             markShips(myShips, "myTable");
-            markShips(mySalvoes, "salvoTable"); // remove this line and uncomment 27-31 after testing
+            markShips(mySalvoes, "salvoTable");
             placeNewShip();
             placeSalvos();
-//            if (myShips.length < 5) {
-//                submit()
-//            } else {
-//                markShips(mySalvoes, "salvoTable");
-//            }
             name(myShips, myOpponentsSalvoes, "ship", "myTable");
             name1(mySalvoes, hitTheOpp, "salvo", "salvoTable");
             getGP(myGP);
@@ -65,13 +60,13 @@ function markShips(myShips, table) {
 }
 
 // alert when clicking on a cell
-function ShipCellVal(cell) {
-    var row = document.getElementById('myTable');
-    var cells = row.getElementsByTagName('td');
-    alert(cells[0].innerText);
-}
+//function ShipCellVal(cell) {
+//    var row = document.getElementById('myTable');
+//     var cells = row.getElementsByTagName('td');
+//    alert(cells[0].getAttribute("id"));
+//}
 
-// place new ship
+// place ships
 function placeNewShip() {
     var tbl = document.getElementById('myTable');
     if (tbl != null) {
@@ -103,6 +98,16 @@ function placeSalvos() {
             td.className = 'selected'
 //            }
         }
+    })
+}
+
+//salvo locations
+var salvoList = []
+function salvoLoc() {
+    mySalvoes.forEach(salvo => {
+        salvo.location.forEach(location => {
+            salvoLoc.push(location);
+        })
     })
 }
 
@@ -221,16 +226,6 @@ function submit() {
         })
 }
 
-//
-var salvoList = []
-function salvoLoc() {
-    mySalvoes.forEach(salvo => {
-        salvo.location.forEach(location => {
-            salvoLoc.push(location);
-        })
-    })
-}
-
 // select a ship
 var selectedShip = ""
 function selectShip(type) {
@@ -239,11 +234,6 @@ function selectShip(type) {
     document.getElementById('battleship').style.backgroundColor = "deepskyblue";
     document.getElementById('submarine').style.backgroundColor = "deepskyblue";
     document.getElementById('patrolBoat').style.backgroundColor = "deepskyblue";
-    //      shipsList.forEach (ship => {
-    //      if (ship.location.length >= 2) {
-    //      document.getElementById(`${ship.type}`).style.backgroundColor = "green";
-    //      }
-    //      })
     document.getElementById(`${type}`).style.backgroundColor = "lawngreen";
     selectedShip = type;
 }
@@ -314,15 +304,6 @@ function drop(ev) {
             console.log(shipsList);
         }
     })
-//    shipsInfo.forEach(ship => {
-//
-//        if (ship.direction == "horizontal") {
-//            newLoc + (ship.size - 1)
-//        } else if (ship.direction == "vertical") {
-//            newLoc
-//        }
-//    })
-// shipsInfo[0].locations.push
 }
 
 //background
@@ -348,7 +329,7 @@ var gradientSpeed = 0.002;
 function updateGradient()
 {
 
-  if ( $===undefined ) return;
+//  if ( $===undefined ) return;
 
 var c0_0 = colors[colorIndices[0]];
 var c0_1 = colors[colorIndices[1]];
