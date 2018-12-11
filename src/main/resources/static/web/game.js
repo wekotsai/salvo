@@ -39,9 +39,8 @@ function getGP(myGP) {
     var template = '';
     myGP.forEach(gp => {
         template += `
-        <p> Username: ${gp.player.email} </p>
-        <!-- if gp.player.id = id then ?(display) "Player" :(else) "Viewer" -->
-        <p> ${gp.player.player_id.toString() === id ? "(Player)" : "(Viewer)"} </p>
+        <br>
+        <p> ${gp.player.player_id.toString() === id ? "PLAYER:" : "VIEWER:"} ${gp.player.email} </p>
        `;
     });
     var email = document.getElementById('email');

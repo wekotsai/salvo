@@ -62,7 +62,7 @@ td {
   background-color: midnightblue;
   color: lightskyblue;
   margin-bottom: 20px;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 #salvoTable {
@@ -74,7 +74,7 @@ td {
   background-color: midnightblue;
   color: lightskyblue;
   margin-bottom: 20px;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 #destroyer {
@@ -85,6 +85,7 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+ border-radius: 10px;
 }
 
 #patrolBoat {
@@ -95,6 +96,7 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+ border-radius: 10px;
 }
 
 #battleship {
@@ -105,6 +107,7 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+ border-radius: 10px;
 }
 
 #carrier {
@@ -115,6 +118,7 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+ border-radius: 10px;
 }
 
 #submarine {
@@ -125,6 +129,7 @@ td {
  height: 45px;
  color: midnightblue;
  background-color: deepskyblue;
+ border-radius: 10px;
 }
 
 #refresh, #submit {
